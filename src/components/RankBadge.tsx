@@ -12,8 +12,8 @@ export function RankBadge({ rank }: { rank: number }) {
     <span
       className="rank-badge"
       style={{
-        background: `color-mix(in srgb, var(--pitch-800) ${strength}%, #eef1ef)`,
-        color: strength > 50 ? 'var(--white)' : 'var(--pitch-900)',
+        background: `color-mix(in srgb, var(--solid) ${strength}%, var(--badge-base))`,
+        color: strength > 50 ? 'var(--white)' : 'var(--text)',
       }}
       title={`Rank ${rank}`}
       aria-label={`Rank ${rank}`}

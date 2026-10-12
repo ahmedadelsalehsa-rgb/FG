@@ -17,8 +17,6 @@ interface Toast {
 }
 
 export default function App() {
-  const api = usePlayers();
-  const { players } = api;
   const [view, setView] = useState<View>('players');
 
   const [initialSession] = useState(loadSession);
@@ -36,6 +34,8 @@ export default function App() {
     setToast({ id: Date.now(), message, kind });
     toastTimer.current = window.setTimeout(() => setToast(null), kind === 'error' ? 6000 : 3000);
   }, []);
+  const api = usePlayers(useCallback((message: string) => notify(message, 'error'), [notify]));
+  const { players } = api;
 
   // Remember the team count and today's selection across refreshes.
   useEffect(() => {
@@ -105,7 +105,7 @@ export default function App() {
         </div>
       </header>
 
-      {!api.saveOk && (
+      {api.mode === 'local' && !api.saveOk && (
         <div className="notice notice-error banner" role="alert">
           Your browser blocked saving. Changes will be lost when you close this page — export your players to keep a
           copy.
@@ -135,8 +135,10 @@ export default function App() {
       </main>
 
       <footer className="app-footer muted">
-        Teams are balanced on your device from the ranks you enter. No account, no server — your list stays in this
-        browser.
+        Teams are balanced on your device from the ranks you enter.{' '}
+        {api.mode === 'shared'
+          ? 'The player list is shared with everyone who has access to this page.'
+          : 'Your player list is saved in this browser.'}
       </footer>
 
       <div className="toast-region" aria-live="polite" role="status">

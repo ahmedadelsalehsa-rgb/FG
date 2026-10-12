@@ -10,6 +10,7 @@ import {
   replacePlayers,
   type ParseResult,
 } from '../utils/importExport';
+import { getDownloads } from '../platform';
 import { ConfirmDialog, Modal } from './Modal';
 import { PlayerForm } from './PlayerForm';
 import { RankBadge } from './RankBadge';
@@ -22,7 +23,16 @@ interface PlayerListProps {
 
 type SortKey = 'name' | 'rank';
 
-function download(fileName: string, content: string, type: string) {
+async function download(fileName: string, content: string, type: string) {
+  const downloads = await getDownloads();
+  if (downloads) {
+    try {
+      await downloads.save({ filename: fileName, data: content });
+    } catch {
+      // Declined or unavailable: nothing to do.
+    }
+    return;
+  }
   const url = URL.createObjectURL(new Blob([content], { type }));
   const a = document.createElement('a');
   a.href = url;
@@ -34,7 +44,7 @@ function download(fileName: string, content: string, type: string) {
 }
 
 export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
-  const { players, updatePlayer, deletePlayer, addPlayer, replaceAll, findByName } = api;
+  const { players, updatePlayer, deletePlayer, addPlayer, replaceAll, findByName, mode, readOnly } = api;
   const [query, setQuery] = useState('');
   const [rankFilter, setRankFilter] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('rank');
@@ -99,7 +109,7 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
           <p className="muted">Your saved squad. Rank 1 is the strongest, {RANK_OPTIONS[RANK_OPTIONS.length - 1]} the weakest.</p>
         </div>
         <div className="page-head-actions">
-          <button type="button" className="btn btn-primary btn-lg" onClick={openAdd}>
+          <button type="button" className="btn btn-primary btn-lg" onClick={openAdd} disabled={readOnly}>
             <span aria-hidden="true">＋</span> Add New Player
           </button>
           <button type="button" className="btn btn-accent btn-lg" onClick={onSortTeams} disabled={players.length < 2}>
@@ -134,18 +144,30 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
         </div>
       )}
 
-      {players.length === 0 ? (
+      {players.length === 0 && mode === 'connecting' ? (
+        <div className="empty card" aria-busy="true">
+          <p className="muted">Loading the player list…</p>
+        </div>
+      ) : players.length === 0 ? (
         <div className="empty card">
           <div className="empty-icon" aria-hidden="true">
             ⚽
           </div>
           <h2>No players yet</h2>
-          <p className="muted">Add the people who usually play, give each a rank, and you are ready to sort fair teams.</p>
+          <p className="muted">
+            Add the people who usually play, give each a rank, and you are ready to sort fair teams.
+            {mode === 'shared' && ' Everyone you share this page with sees the same list.'}
+          </p>
           <div className="empty-actions">
-            <button type="button" className="btn btn-primary" onClick={openAdd}>
+            <button type="button" className="btn btn-primary" onClick={openAdd} disabled={readOnly}>
               Add your first player
             </button>
-            <button type="button" className="btn btn-secondary" onClick={() => fileInput.current?.click()}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => fileInput.current?.click()}
+              disabled={readOnly}
+            >
               Import a list
             </button>
           </div>
@@ -227,6 +249,7 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                         <select
                           className="rank-select"
                           value={p.rank}
+                          disabled={readOnly}
                           aria-label={`Rank for ${p.name}`}
                           onChange={(e) => updatePlayer(p.id, { rank: Number(e.target.value) })}
                         >
@@ -242,6 +265,7 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                           <button
                             type="button"
                             className="btn btn-ghost btn-sm"
+                            disabled={readOnly}
                             onClick={() => {
                               setEditing(p);
                               setFormOpen(true);
@@ -253,6 +277,7 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                           <button
                             type="button"
                             className="btn btn-ghost-danger btn-sm"
+                            disabled={readOnly}
                             onClick={() => setToDelete(p)}
                             aria-label={`Delete ${p.name}`}
                           >
@@ -275,9 +300,22 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
       )}
 
       <div className="data-tools">
-        <span className="muted">Saved automatically in this browser.</span>
+        <span className={`sync-status sync-${mode}`}>
+          {mode === 'shared'
+            ? readOnly
+              ? 'Shared list · view only'
+              : 'Shared list · saved automatically for everyone with access'
+            : mode === 'connecting'
+              ? 'Connecting…'
+              : 'Saved automatically in this browser'}
+        </span>
         <div className="data-buttons">
-          <button type="button" className="btn btn-secondary btn-sm" onClick={() => fileInput.current?.click()}>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            disabled={readOnly}
+            onClick={() => fileInput.current?.click()}
+          >
             Import JSON/CSV
           </button>
           <button

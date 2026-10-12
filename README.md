@@ -16,6 +16,14 @@ npm run preview    # serve the production build locally
 
 `dist/` is a static site (relative paths), so you can host it on any static host or open it from a sub-folder.
 
+### Shared version (claude.ai Artifact)
+
+```bash
+npm run build:artifact   # → dist-artifact/fair-football.html (one self-contained file)
+```
+
+When this file is published as a claude.ai Artifact with the `db` capability, the player list is stored in the Artifact's shared database (collection `players`) and syncs live for everyone the page is shared with. Opened anywhere else, the app falls back to this browser's `localStorage`. Each person's team count and selected players stay in their own browser. See `src/platform.ts` and `src/hooks/usePlayers.ts`.
+
 ## Features
 
 **Players page**
