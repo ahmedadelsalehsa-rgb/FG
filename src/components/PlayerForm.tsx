@@ -8,7 +8,7 @@ interface PlayerFormProps {
   open: boolean;
   /** Player being edited; undefined when adding a new player. */
   player?: Player;
-  onSave: (name: string, ratings: Ratings) => void;
+  onSave: (name: string, ratings: Ratings, gk: boolean) => void;
   onClose: () => void;
   findByName: (name: string, exceptId?: string) => Player | undefined;
 }
@@ -18,6 +18,7 @@ export const MAX_NAME_LENGTH = 40;
 export function PlayerForm({ open, player, onSave, onClose, findByName }: PlayerFormProps) {
   const [name, setName] = useState('');
   const [ratings, setRatings] = useState<Ratings>(emptyRatings);
+  const [gk, setGk] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const nameId = useId();
   const ratingsId = useId();
@@ -26,6 +27,7 @@ export function PlayerForm({ open, player, onSave, onClose, findByName }: Player
     if (open) {
       setName(player?.name ?? '');
       setRatings(player ? { ...player.ratings } : emptyRatings());
+      setGk(player?.gk ?? false);
       setSubmitted(false);
     }
   }, [open, player]);
@@ -43,7 +45,7 @@ export function PlayerForm({ open, player, onSave, onClose, findByName }: Player
     e.preventDefault();
     setSubmitted(true);
     if (nameError) return;
-    onSave(trimmed, ratings);
+    onSave(trimmed, ratings, gk);
     onClose();
   };
 
@@ -73,6 +75,13 @@ export function PlayerForm({ open, player, onSave, onClose, findByName }: Player
             </p>
           )}
         </div>
+        <label className="switch-field">
+          <input type="checkbox" role="switch" className="switch" checked={gk} onChange={(e) => setGk(e.target.checked)} />
+          <span>
+            <strong>GK skills</strong>
+            <span className="field-hint">Can play in goal. Teams are sorted so each gets a goalkeeper when possible.</span>
+          </span>
+        </label>
         <fieldset className="field rater-fields" aria-describedby={`${ratingsId}-hint`}>
           <legend>Ranks</legend>
           <div className="rater-grid">

@@ -5,7 +5,7 @@ import { createRng, shuffled } from './random';
 import { balanceTeams, summarizeFairness, teamSizes, teamStrength } from './teamBalancer';
 
 function makePlayers(ranks: number[], prefix = 'P'): Player[] {
-  return ranks.map((rank, i) => ({ id: `${prefix}${i + 1}`, name: `${prefix}${i + 1}`, ratings: {}, rank }));
+  return ranks.map((rank, i) => ({ id: `${prefix}${i + 1}`, name: `${prefix}${i + 1}`, ratings: {}, gk: false, rank }));
 }
 
 function rankCounts(result: TeamResult, rank: number): number[] {
@@ -248,6 +248,56 @@ describe('balanceTeams vs naive allocations', () => {
     const result = balanceTeams(players, 3);
     expect(result.strengthDifference).toBe(0);
     expect(rankCounts(result, 1)).toEqual([1, 1, 1]);
+  });
+});
+
+/** Marks the players at the given (0-based) positions as goalkeepers. */
+function withGks(players: Player[], positions: number[]): Player[] {
+  return players.map((p, i) => (positions.includes(i) ? { ...p, gk: true } : p));
+}
+
+const gkCounts = (result: TeamResult) => result.teams.map((t) => t.players.filter((p) => p.gk).length);
+
+describe('goalkeepers', () => {
+  it('gives every team a goalkeeper when there are enough, even if they share a rank', () => {
+    // Three rank-1 goalkeepers: rank spreading alone would also split them, so use
+    // goalkeepers of different ranks that pure strength balancing would stack.
+    const players = withGks(makePlayers([1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10]), [6, 7, 8]);
+    for (let k = 2; k <= 3; k++) {
+      const result = balanceTeams(players, k);
+      expectExactlyOnce(result, players);
+      expect(Math.min(...gkCounts(result)), `teams=${k}`).toBeGreaterThanOrEqual(1);
+    }
+  });
+
+  it('never gives a team two goalkeepers while another has none', () => {
+    const rng = createRng(77);
+    for (let trial = 0; trial < 40; trial++) {
+      const k = 2 + (trial % 4);
+      const n = k * 3 + (trial % 4);
+      const ranks = Array.from({ length: n }, () => 1 + Math.floor(rng() * 10));
+      const gkPositions = Array.from({ length: n }, (_, i) => i).filter(() => rng() < 0.3);
+      const players = withGks(makePlayers(ranks, `G${trial}-`), gkPositions);
+      const result = balanceTeams(players, k);
+      expectExactlyOnce(result, players);
+      const counts = gkCounts(result);
+      expect(Math.max(...counts) - Math.min(...counts), `trial ${trial}: ${counts}`).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it('with fewer goalkeepers than teams, puts them in different teams', () => {
+    const players = withGks(makePlayers([1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10]), [0, 1]);
+    const result = balanceTeams(players, 4);
+    expect(gkCounts(result).sort()).toEqual([0, 0, 1, 1]);
+  });
+
+  it('regenerating keeps the goalkeeper spread and the same fairness', () => {
+    const players = withGks(makePlayers([1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9]), [3, 6, 10]);
+    const first = balanceTeams(players, 3);
+    const next = balanceTeams(players, 3, { seed: 5, avoidSignature: first.signature });
+    expect(next.signature).not.toBe(first.signature);
+    expect(gkCounts(next)).toEqual([1, 1, 1]);
+    expect(next.strengthDifference).toBeLessThanOrEqual(first.strengthDifference + 10);
   });
 });
 

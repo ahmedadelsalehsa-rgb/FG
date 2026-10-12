@@ -29,6 +29,7 @@ When this file is published as a claude.ai Artifact with the `db` capability, th
 **Players page**
 - Three raters (Adel, Qoshiry, Abdelfattah — set in `RATERS` in `src/config.ts`) each rank every player 1–10 from their own dropdown column. **Rank** is the average of the ratings given so far (e.g. 2.33) and is what the balancer uses; a player nobody has rated yet can't be picked for a game.
 - **Add New Player** form: Name (required) plus an optional rank from each rater.
+- **GK skills** toggle per player (in the list and the form). When sorting, goalkeepers are spread first: with at least as many goalkeepers as teams every team gets one, and no team gets a second goalkeeper while another has none (`gkSpreadWeight` in `src/config.ts`).
 - Table with name, rank and actions. You can change rank directly in the table, **Edit** both fields, or **Delete** a player after confirming.
 - Names must be unique. The check ignores case and extra spaces, so "ahmed" is rejected if "Ahmed" exists.
 - Search, rank filter, player count, and a rank-distribution chart (click a bar to filter by that rank).

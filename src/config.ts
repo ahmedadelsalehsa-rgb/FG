@@ -83,6 +83,12 @@ export const BALANCER_SETTINGS = {
    * larger strength gap; lower values do the opposite.
    */
   rankSpreadWeight: 1,
+  /**
+   * Penalty per goalkeeper beyond an even spread. Higher than any rank penalty
+   * (a rank-1 player is worth 100), so with at least as many goalkeepers as
+   * teams every team gets one, even if that costs a little strength balance.
+   */
+  gkSpreadWeight: 200,
   /** Small weight on the standard deviation of team totals (tie-breaker for 3+ teams). */
   deviationWeight: 0.25,
   /**

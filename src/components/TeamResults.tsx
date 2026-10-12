@@ -43,6 +43,7 @@ export function TeamResults({ result, onRegenerate, onBack, onStartOver, notify 
   const shareText = useMemo(() => teamsToShareText(result), [result]);
   const maxStrength = Math.max(1, ...result.teams.map((t) => t.strength));
   const totalPlayers = result.teams.reduce((n, t) => n + t.players.length, 0);
+  const anyGk = result.teams.some((t) => t.players.some((p) => p.gk));
 
   const copy = async () => {
     if (await copyText(shareText)) notify('Teams copied — paste them into WhatsApp or any chat.');
@@ -86,14 +87,27 @@ export function TeamResults({ result, onRegenerate, onBack, onStartOver, notify 
             <header className="team-head">
               <h3>{team.name}</h3>
               <div className="team-meta">
-                <span>{team.players.length} players</span>
+                <span>
+                  {team.players.length} players
+                  {anyGk && !team.players.some((p) => p.gk) && <span className="no-gk"> · no GK</span>}
+                </span>
                 <span>Strength {formatStrength(team.strength)}</span>
               </div>
             </header>
             <ol className="team-players">
               {team.players.map((p) => (
                 <li key={p.id}>
-                  <span className="team-player-name">{p.name}</span>
+                  <span className="team-player-name">
+                    {p.name}
+                    {p.gk && (
+                      <>
+                        {' '}
+                        <span className="gk-tag" title="Goalkeeper skills">
+                          GK
+                        </span>
+                      </>
+                    )}
+                  </span>
                   <RankBadge rank={p.rank} />
                 </li>
               ))}

@@ -245,6 +245,9 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                 <thead>
                   <tr>
                     <th scope="col">Player</th>
+                    <th scope="col" className="gk-col">
+                      GK
+                    </th>
                     {RATERS.map((r) => (
                       <th scope="col" key={r.id} className="rater-col">
                         {r.name}
@@ -265,6 +268,22 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                         <div className="name-cell">
                           <span>{p.name}</span>
                         </div>
+                      </td>
+                      <td className="gk-col" data-label="GK">
+                        <label className="gk-toggle" title="Goalkeeper skills">
+                          <input
+                            type="checkbox"
+                            role="switch"
+                            className="switch"
+                            checked={p.gk}
+                            disabled={readOnly}
+                            aria-label={`${p.name} has goalkeeper skills`}
+                            onChange={(e) => updatePlayer(p.id, { gk: e.target.checked })}
+                          />
+                          <span className="gk-toggle-text" aria-hidden="true">
+                            GK
+                          </span>
+                        </label>
                       </td>
                       {RATERS.map((r) => (
                         <td key={r.id} className="rater-col" data-label={r.name}>
@@ -393,12 +412,12 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
         player={editing}
         findByName={findByName}
         onClose={() => setFormOpen(false)}
-        onSave={(name, ratings) => {
+        onSave={(name, ratings, gk) => {
           if (editing) {
-            updatePlayer(editing.id, { name, ratings });
+            updatePlayer(editing.id, { name, ratings, gk });
             notify(`Updated ${name}.`);
           } else {
-            addPlayer(name, ratings);
+            addPlayer(name, ratings, gk);
             notify(`Added ${name}.`);
           }
         }}

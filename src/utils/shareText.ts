@@ -8,7 +8,9 @@ export function teamsToShareText(result: TeamResult, date: Date = new Date()): s
   for (const team of result.teams) {
     lines.push('');
     lines.push(`*${team.name}* (${team.players.length} players)`);
-    team.players.forEach((p, i) => lines.push(`${i + 1}. ${p.name}`));
+    // Goalkeepers first, marked so the group knows who starts in goal.
+    const ordered = [...team.players.filter((p) => p.gk), ...team.players.filter((p) => !p.gk)];
+    ordered.forEach((p, i) => lines.push(`${i + 1}. ${p.name}${p.gk ? ' 🧤 (GK)' : ''}`));
   }
   lines.push('');
   const fairness = summarizeFairness(result);

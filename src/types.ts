@@ -5,6 +5,8 @@ export interface Player {
   id: string;
   name: string;
   ratings: Ratings;
+  /** Can play in goal. The balancer tries to give every team at least one. */
+  gk: boolean;
   /**
    * Average of the ratings given so far — always derived from `ratings`, never
    * edited directly. null = nobody has rated the player yet; such a player

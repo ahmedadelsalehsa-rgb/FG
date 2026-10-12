@@ -19,9 +19,9 @@ export interface PlayersApi {
   readOnly: boolean;
   /** False when the browser refused to save (private mode, storage full, …). */
   saveOk: boolean;
-  addPlayer: (name: string, ratings: Ratings) => void;
-  /** Changes the name and/or some raters' ranks; other raters' ranks are left as they are. */
-  updatePlayer: (id: string, changes: { name?: string; ratings?: Ratings }) => void;
+  addPlayer: (name: string, ratings: Ratings, gk: boolean) => void;
+  /** Changes the name, goalkeeper flag and/or some raters' ranks; other raters' ranks are left as they are. */
+  updatePlayer: (id: string, changes: { name?: string; ratings?: Ratings; gk?: boolean }) => void;
   deletePlayer: (id: string) => void;
   replaceAll: (players: Player[]) => void;
   /** Returns the existing player with this name (case/whitespace-insensitive), if any. */
@@ -118,13 +118,16 @@ export function usePlayers(onError: (message: string) => void): PlayersApi {
 
   const shared = () => mode === 'shared' && collection.current;
 
-  const addPlayer = (name: string, ratings: Ratings) => {
-    const player = makePlayer(newId(), cleanName(name), ratings);
-    if (shared()) void write([(c) => c.doc(player.id).set({ name: player.name, ratings: player.ratings })]);
-    else setPlayers((ps) => [...ps, player]);
+  const addPlayer = (name: string, ratings: Ratings, gk: boolean) => {
+    const player = makePlayer(newId(), cleanName(name), ratings, gk);
+    if (shared()) {
+      void write([(c) => c.doc(player.id).set({ name: player.name, ratings: player.ratings, gk: player.gk })]);
+    } else {
+      setPlayers((ps) => [...ps, player]);
+    }
   };
 
-  const updatePlayer = (id: string, changes: { name?: string; ratings?: Ratings }) => {
+  const updatePlayer = (id: string, changes: { name?: string; ratings?: Ratings; gk?: boolean }) => {
     const current = playersRef.current.find((p) => p.id === id);
     if (!current) return;
     const name = cleanName(changes.name ?? current.name);
@@ -133,9 +136,10 @@ export function usePlayers(onError: (message: string) => void): PlayersApi {
       const body: Record<string, unknown> = {};
       if (changes.name !== undefined) body.name = name;
       if (changes.ratings) body.ratings = changes.ratings;
+      if (changes.gk !== undefined) body.gk = changes.gk;
       void write([(c) => c.doc(id).update(body)]);
     } else {
-      const next = makePlayer(id, name, { ...current.ratings, ...changes.ratings });
+      const next = makePlayer(id, name, { ...current.ratings, ...changes.ratings }, changes.gk ?? current.gk);
       setPlayers((ps) => ps.map((p) => (p.id === id ? next : p)));
     }
   };
@@ -156,8 +160,13 @@ export function usePlayers(onError: (message: string) => void): PlayersApi {
     for (const p of playersRef.current) if (!keep.has(p.id)) ops.push((c) => c.doc(p.id).delete());
     for (const p of next) {
       const old = before.get(p.id);
-      if (!old || old.name !== p.name || JSON.stringify(old.ratings) !== JSON.stringify(p.ratings)) {
-        ops.push((c) => c.doc(p.id).set({ name: p.name, ratings: p.ratings }));
+      if (
+        !old ||
+        old.name !== p.name ||
+        old.gk !== p.gk ||
+        JSON.stringify(old.ratings) !== JSON.stringify(p.ratings)
+      ) {
+        ops.push((c) => c.doc(p.id).set({ name: p.name, ratings: p.ratings, gk: p.gk }));
       }
     }
     void write(ops);

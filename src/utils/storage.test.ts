@@ -15,7 +15,7 @@ function memoryStore(): KeyValueStore & { data: Map<string, string> } {
 
 const sample: Player[] = [
   makePlayer('a', 'Ali', { adel: 1, koshiry: 2, abdelfattah: 1 }),
-  makePlayer('b', 'Bilal, Jr.', { adel: 4, koshiry: null, abdelfattah: 5 }),
+  makePlayer('b', 'Bilal, Jr.', { adel: 4, koshiry: null, abdelfattah: 5 }, true),
   makePlayer('c', 'Chris "CJ" Jones', { adel: null, koshiry: 10, abdelfattah: null }),
 ];
 
@@ -88,7 +88,7 @@ describe('storage', () => {
 });
 
 describe('import / export', () => {
-  const asImported = sample.map(({ name, ratings }) => ({ name, ratings }));
+  const asImported = sample.map(({ name, ratings, gk }) => ({ name, ratings, gk }));
 
   it('round-trips JSON', () => {
     const parsed = parseImportFile('players.json', exportJson(sample));
@@ -98,7 +98,7 @@ describe('import / export', () => {
 
   it('round-trips CSV, including commas and quotes in names', () => {
     const csv = exportCsv(sample);
-    expect(csv.split('\n')[0]).toBe('name,Adel,Qoshiry,Abdelfattah,average');
+    expect(csv.split('\n')[0]).toBe('name,GK,Adel,Qoshiry,Abdelfattah,average');
     const parsed = parseImportFile('players.csv', csv);
     expect(parsed.players).toEqual(asImported);
     expect(parsed.warnings).toEqual([]);
@@ -110,6 +110,19 @@ describe('import / export', () => {
       { name: 'Sam', ratings: { adel: null, koshiry: 2, abdelfattah: null } },
       { name: 'Lee', ratings: { adel: 7, koshiry: null, abdelfattah: null } },
     ]);
+  });
+
+  it('reads a GK column (yes/no, 1/0, x) and leaves it unset when missing', () => {
+    const parsed = parseImportFile('x.csv', 'name,GK\nA,yes\nB,no\nC,x\nD,\n');
+    expect(parsed.players.map((p) => p.gk)).toEqual([true, false, true, undefined]);
+    const merged = mergePlayers(sample, [{ name: 'Bilal, Jr.', ratings: {}, gk: undefined }]);
+    expect(merged.find((p) => p.id === 'b')!.gk).toBe(true);
+  });
+
+  it('keeps the goalkeeper flag through storage', () => {
+    const store = memoryStore();
+    savePlayers(sample, store);
+    expect(loadPlayers(store).map((p) => p.gk)).toEqual([false, true, false]);
   });
 
   it('accepts a names-only list (everything unrated)', () => {

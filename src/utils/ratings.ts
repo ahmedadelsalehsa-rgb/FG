@@ -28,9 +28,9 @@ export function ratingCount(ratings: Ratings): number {
   return RATERS.filter((r) => typeof ratings[r.id] === 'number').length;
 }
 
-export function makePlayer(id: string, name: string, ratings: Ratings): Player {
+export function makePlayer(id: string, name: string, ratings: Ratings, gk = false): Player {
   const clean = cleanRatings(ratings);
-  return { id, name, ratings: clean, rank: averageRank(clean) };
+  return { id, name, ratings: clean, gk: gk === true, rank: averageRank(clean) };
 }
 
 /** "2", "2.5", "2.33" — compact display of an averaged rank. */

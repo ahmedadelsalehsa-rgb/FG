@@ -788,6 +788,102 @@ select[aria-invalid='true'] {
   white-space: nowrap;
 }
 
+/* ---------- GK switch ---------- */
+
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  position: relative;
+  width: 2.6rem;
+  height: 1.5rem;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--track);
+  border: 1px solid var(--input-border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.5rem - 6px);
+  height: calc(1.5rem - 6px);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s;
+}
+
+.switch:checked {
+  background: var(--pitch-500);
+  border-color: var(--pitch-500);
+}
+
+.switch:checked::before {
+  transform: translateX(1.1rem);
+}
+
+.switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.switch-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  cursor: pointer;
+}
+
+.switch-field > span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.gk-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.gk-toggle-text {
+  display: none;
+}
+
+.players-table th.gk-col,
+.players-table td.gk-col {
+  text-align: center;
+  width: 1%;
+}
+
+.gk-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: var(--warn-bg);
+  color: var(--warn);
+  border: 1px solid var(--warn-border);
+  vertical-align: middle;
+}
+
+.no-gk {
+  color: var(--danger);
+  font-weight: 600;
+}
+
 .players-table th.rater-col,
 .players-table th.avg-col {
   text-align: center;
@@ -1414,7 +1510,7 @@ select[aria-invalid='true'] {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
     grid-template-areas:
-      'name name name avg'
+      'name name gk avg'
       'r1 r2 r3 avg'
       'actions actions actions actions';
     gap: 0.35rem 0.5rem;
@@ -1442,15 +1538,24 @@ select[aria-invalid='true'] {
     min-width: 3.2rem;
   }
 
-  .players-table td.rater-col:nth-child(2) {
-    grid-area: r1;
+  .players-table td.gk-col {
+    grid-area: gk;
+    align-self: center;
+  }
+
+  .gk-toggle .gk-toggle-text {
+    display: inline;
   }
 
   .players-table td.rater-col:nth-child(3) {
-    grid-area: r2;
+    grid-area: r1;
   }
 
   .players-table td.rater-col:nth-child(4) {
+    grid-area: r2;
+  }
+
+  .players-table td.rater-col:nth-child(5) {
     grid-area: r3;
   }
 

@@ -44,6 +44,7 @@ export function TeamSelection({
   const selected = sorted.filter((p) => selectedIds.has(p.id));
   const selectedCount = selected.length;
   const selectedUnranked = selected.filter((p) => !isRanked(p));
+  const selectedGks = selected.filter((p) => p.gk).length;
   const min = minimumPlayers(teamCount);
   const tooFew = selectedCount < min;
   const blocked = tooFew || selectedUnranked.length > 0;
@@ -169,6 +170,14 @@ export function TeamSelection({
                     />
                     <span className="check-name">
                       {p.name}
+                      {p.gk && (
+                        <>
+                          {' '}
+                          <span className="gk-tag" title="Goalkeeper skills">
+                            GK
+                          </span>
+                        </>
+                      )}
                       {missingRank && <span className="check-error">No rank</span>}
                     </span>
                     <RankBadge rank={p.rank} />
@@ -226,7 +235,14 @@ export function TeamSelection({
           </p>
         ) : (
           <p id={countHelpId} className="muted">
-            {selectedCount} players → {sizeText}.
+            {selectedCount} players → {sizeText}.{' '}
+            {selectedGks === 0
+              ? 'No goalkeepers selected.'
+              : selectedGks >= teamCount
+                ? `${selectedGks} goalkeeper${selectedGks === 1 ? '' : 's'} selected — every team gets at least one.`
+                : `Only ${selectedGks} goalkeeper${selectedGks === 1 ? '' : 's'} for ${teamCount} teams — ${
+                    teamCount - selectedGks
+                  } team${teamCount - selectedGks === 1 ? '' : 's'} will have none.`}
           </p>
         )}
         <button

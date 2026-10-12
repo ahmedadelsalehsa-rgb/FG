@@ -7,6 +7,8 @@ export interface ImportedPlayer {
   name: string;
   /** Per-rater ranks; empty cells become null and can be filled in later in the app. */
   ratings: Ratings;
+  /** true/false from a GK column; undefined when the file has none (keeps the current value on merge). */
+  gk?: boolean;
 }
 
 export interface ParseResult {
@@ -26,7 +28,7 @@ export function exportJson(players: Player[]): string {
       version: 2,
       exportedAt: new Date().toISOString(),
       raters: RATERS.map((r) => r.name),
-      players: players.map(({ name, ratings, rank }) => ({ name, ratings, averageRank: rank })),
+      players: players.map(({ name, ratings, gk, rank }) => ({ name, gk, ratings, averageRank: rank })),
     },
     null,
     2,
@@ -39,9 +41,14 @@ function csvCell(value: string): string {
 
 /** CSV with one column per rater plus the average (the average is ignored on import). */
 export function exportCsv(players: Player[]): string {
-  const header = ['name', ...RATERS.map((r) => r.name), 'average'].join(',');
+  const header = ['name', 'GK', ...RATERS.map((r) => r.name), 'average'].join(',');
   const rows = players.map((p) =>
-    [csvCell(p.name), ...RATERS.map((r) => p.ratings[r.id] ?? ''), p.rank === null ? '' : formatRank(p.rank)].join(','),
+    [
+      csvCell(p.name),
+      p.gk ? 'yes' : 'no',
+      ...RATERS.map((r) => p.ratings[r.id] ?? ''),
+      p.rank === null ? '' : formatRank(p.rank),
+    ].join(','),
   );
   return [header, ...rows].join('\n') + '\n';
 }
@@ -94,7 +101,16 @@ function raterFor(key: string): string | undefined {
 interface RawEntry {
   name: unknown;
   ratings: Record<string, unknown>;
+  gk?: unknown;
   where: string;
+}
+
+/** Reads yes/no-style values; undefined when the cell is empty or missing. */
+function parseFlag(v: unknown): boolean | undefined {
+  if (typeof v === 'boolean') return v;
+  if (typeof v === 'number') return v !== 0;
+  if (typeof v !== 'string' || !v.trim()) return undefined;
+  return ['yes', 'y', 'true', '1', 'x', 'gk', '✓', 'نعم'].includes(v.trim().toLowerCase());
 }
 
 function collect(entries: RawEntry[]): ParseResult {
@@ -102,7 +118,7 @@ function collect(entries: RawEntry[]): ParseResult {
   const warnings: string[] = [];
   const seen = new Set<string>();
   const range = `${RANK_OPTIONS[0]}–${RANK_OPTIONS[RANK_OPTIONS.length - 1]}`;
-  for (const { name, ratings: raw, where } of entries) {
+  for (const { name, ratings: raw, gk, where } of entries) {
     const n = typeof name === 'string' ? name.trim().replace(/\s+/g, ' ') : '';
     if (!n) {
       warnings.push(`${where}: missing name — skipped.`);
@@ -122,7 +138,8 @@ function collect(entries: RawEntry[]): ParseResult {
       continue;
     }
     seen.add(key);
-    players.push({ name: n, ratings });
+    const flag = parseFlag(gk);
+    players.push(flag === undefined ? { name: n, ratings } : { name: n, ratings, gk: flag });
   }
   return { players, warnings };
 }
@@ -150,7 +167,7 @@ export function parseJson(text: string): ParseResult {
         const id = raterFor(k);
         if (id) ratings[id] = v;
       }
-      return { name: o.name, ratings, where: `Entry ${i + 1}` };
+      return { name: o.name, ratings, gk: o.gk ?? o.GK, where: `Entry ${i + 1}` };
     }),
   );
 }
@@ -165,10 +182,12 @@ export function parseCsv(text: string): ParseResult {
     ? header.map((h, i) => [raterFor(h), i] as const).filter((x): x is readonly [string, number] => !!x[0])
     : RATERS.map((r, i) => [r.id, i + 1] as const);
   const start = hasHeader ? 1 : 0;
+  const gkCol = hasHeader ? header.findIndex((h) => ['gk', 'goalkeeper', 'gk skills'].includes(h)) : -1;
   return collect(
     rows.slice(start).map((row, i) => ({
       name: row[nameCol],
       ratings: Object.fromEntries(raterCols.map(([id, col]) => [id, row[col]])),
+      gk: gkCol >= 0 ? row[gkCol] : undefined,
       where: `Row ${i + start + 1}`,
     })),
   );
@@ -192,16 +211,16 @@ export function mergePlayers(existing: Player[], imported: ImportedPlayer[]): Pl
   for (const imp of imported) {
     const i = byName.get(normalizeName(imp.name));
     if (i === undefined) {
-      result.push(makePlayer(newId(), imp.name, imp.ratings));
+      result.push(makePlayer(newId(), imp.name, imp.ratings, imp.gk ?? false));
       continue;
     }
     const merged = { ...result[i].ratings };
     for (const r of RATERS) if (imp.ratings[r.id] != null) merged[r.id] = imp.ratings[r.id];
-    result[i] = makePlayer(result[i].id, result[i].name, cleanRatings(merged));
+    result[i] = makePlayer(result[i].id, result[i].name, cleanRatings(merged), imp.gk ?? result[i].gk);
   }
   return result;
 }
 
 export function replacePlayers(imported: ImportedPlayer[]): Player[] {
-  return imported.map((p) => makePlayer(newId(), p.name, p.ratings));
+  return imported.map((p) => makePlayer(newId(), p.name, p.ratings, p.gk ?? false));
 }

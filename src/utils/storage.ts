@@ -39,12 +39,12 @@ export function sanitizePlayers(value: unknown): Player[] {
   const out: Player[] = [];
   for (const item of value) {
     if (!item || typeof item !== 'object') continue;
-    const { id, name, ratings } = item as Record<string, unknown>;
+    const { id, name, ratings, gk } = item as Record<string, unknown>;
     if (typeof name !== 'string' || !name.trim()) continue;
     let pid = typeof id === 'string' && id ? id : newId();
     if (seen.has(pid)) pid = newId();
     seen.add(pid);
-    out.push(makePlayer(pid, name.trim(), (ratings ?? {}) as Player['ratings']));
+    out.push(makePlayer(pid, name.trim(), (ratings ?? {}) as Player['ratings'], gk === true));
   }
   return out;
 }

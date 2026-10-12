@@ -74,6 +74,9 @@ interface Problem {
   group: number[]; // rank-group index per player
   groupSize: number[];
   groupWeight: number[];
+  /** 1 for players with goalkeeper skills, else 0. */
+  gk: number[];
+  gkTotal: number;
   maxSize: number; // base + 1 (only relevant when there is a remainder)
   baseSize: number;
 }
@@ -83,6 +86,7 @@ interface State {
   totals: number[];
   sizes: number[];
   counts: number[][]; // counts[team][group]
+  gkCounts: number[]; // goalkeepers per team
 }
 
 function buildProblem(players: readonly Player[], k: number, scale: StrengthScale): Problem {
@@ -101,6 +105,8 @@ function buildProblem(players: readonly Player[], k: number, scale: StrengthScal
     group,
     groupSize,
     groupWeight: ranks.map((r) => rankToScore(r, scale) * BALANCER_SETTINGS.rankSpreadWeight),
+    gk: players.map((p) => (p.gk ? 1 : 0)),
+    gkTotal: players.filter((p) => p.gk).length,
     baseSize: Math.floor(players.length / k),
     maxSize: Math.ceil(players.length / k),
   };
@@ -110,12 +116,14 @@ function makeState(pb: Problem, team: number[]): State {
   const totals = new Array(pb.k).fill(0);
   const sizes = new Array(pb.k).fill(0);
   const counts = Array.from({ length: pb.k }, () => new Array(pb.groupSize.length).fill(0));
+  const gkCounts = new Array(pb.k).fill(0);
   team.forEach((t, i) => {
     totals[t] += pb.scores[i];
     sizes[t]++;
     counts[t][pb.group[i]]++;
+    gkCounts[t] += pb.gk[i];
   });
-  return { team, totals, sizes, counts };
+  return { team, totals, sizes, counts, gkCounts };
 }
 
 function strengthCost(totals: number[]): number {
@@ -145,6 +153,24 @@ function groupPenalty(pb: Problem, st: State, g: number): number {
   return excess * pb.groupWeight[g];
 }
 
+/**
+ * Goalkeepers are spread like a rank group (each team gets floor/ceil of them),
+ * with a weight above any rank penalty: with at least as many goalkeepers as
+ * teams every team gets one, and no team gets a second while another has none.
+ */
+function gkPenalty(pb: Problem, st: State): number {
+  if (pb.gkTotal === 0) return 0;
+  const lo = Math.floor(pb.gkTotal / pb.k);
+  const hi = Math.ceil(pb.gkTotal / pb.k);
+  let excess = 0;
+  for (let t = 0; t < pb.k; t++) {
+    const c = st.gkCounts[t];
+    if (c > hi) excess += c - hi;
+    else if (c < lo) excess += lo - c;
+  }
+  return excess * BALANCER_SETTINGS.gkSpreadWeight;
+}
+
 function totalRankPenalty(pb: Problem, st: State): number {
   let sum = 0;
   for (let g = 0; g < pb.groupSize.length; g++) sum += groupPenalty(pb, st, g);
@@ -152,7 +178,7 @@ function totalRankPenalty(pb: Problem, st: State): number {
 }
 
 function cost(pb: Problem, st: State): number {
-  return strengthCost(st.totals) + totalRankPenalty(pb, st);
+  return strengthCost(st.totals) + totalRankPenalty(pb, st) + gkPenalty(pb, st);
 }
 
 /** Move player i to team `to`, updating the incremental state. */
@@ -164,6 +190,8 @@ function move(pb: Problem, st: State, i: number, to: number): void {
   st.sizes[to]++;
   st.counts[from][pb.group[i]]--;
   st.counts[to][pb.group[i]]++;
+  st.gkCounts[from] -= pb.gk[i];
+  st.gkCounts[to] += pb.gk[i];
   st.team[i] = to;
 }
 
@@ -191,12 +219,12 @@ function improve(pb: Problem, st: State): number {
         const b = st.team[j];
         if (a === b) continue;
         const gj = pb.group[j];
-        if (gi === gj) continue; // same rank → identical cost
+        if (gi === gj && pb.gk[i] === pb.gk[j] && pb.scores[i] === pb.scores[j]) continue; // interchangeable → identical cost
         const before = groupPenalty(pb, st, gi) + groupPenalty(pb, st, gj);
         move(pb, st, i, b);
         move(pb, st, j, a);
         const after = groupPenalty(pb, st, gi) + groupPenalty(pb, st, gj);
-        const c = strengthCost(st.totals) + rankPen - before + after;
+        const c = strengthCost(st.totals) + rankPen - before + after + gkPenalty(pb, st);
         move(pb, st, j, b);
         move(pb, st, i, a);
         if (c < bestCost) {
@@ -212,7 +240,7 @@ function improve(pb: Problem, st: State): number {
           const before = groupPenalty(pb, st, gi);
           move(pb, st, i, b);
           const after = groupPenalty(pb, st, gi);
-          const c = strengthCost(st.totals) + rankPen - before + after;
+          const c = strengthCost(st.totals) + rankPen - before + after + gkPenalty(pb, st);
           move(pb, st, i, a);
           if (c < bestCost) {
             bestCost = c;
@@ -311,8 +339,13 @@ function randomStart(pb: Problem, rng: () => number): number[] {
  */
 function shuffleWithinRanks(pb: Problem, team: number[], rng: () => number): number[] {
   const out = team.slice();
-  for (let g = 0; g < pb.groupSize.length; g++) {
-    const members = out.map((_, i) => i).filter((i) => pb.group[i] === g);
+  // Only players with the exact same score and goalkeeper role are interchangeable.
+  const classes = new Map<string, number[]>();
+  out.forEach((_, i) => {
+    const key = `${pb.scores[i]}|${pb.gk[i]}`;
+    classes.set(key, [...(classes.get(key) ?? []), i]);
+  });
+  for (const members of classes.values()) {
     const slots = shuffled(
       members.map((i) => team[i]),
       rng,
