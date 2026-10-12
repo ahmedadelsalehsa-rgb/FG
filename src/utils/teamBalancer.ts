@@ -86,9 +86,12 @@ interface State {
 }
 
 function buildProblem(players: readonly Player[], k: number, scale: StrengthScale): Problem {
-  const ranks = [...new Set(players.map((p) => p.rank))].sort((a, b) => a - b);
+  // Averaged ranks can be fractional (2.33); players are grouped by the nearest
+  // whole rank for spreading, while their exact rank drives the strength score.
+  const level = (p: Player) => Math.round(p.rank);
+  const ranks = [...new Set(players.map(level))].sort((a, b) => a - b);
   const groupOf = new Map(ranks.map((r, i) => [r, i]));
-  const group = players.map((p) => groupOf.get(p.rank)!);
+  const group = players.map((p) => groupOf.get(level(p))!);
   const groupSize = ranks.map(() => 0);
   group.forEach((g) => groupSize[g]++);
   return {

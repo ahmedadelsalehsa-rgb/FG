@@ -6,8 +6,19 @@
  * changed in one place.
  */
 
-/** Ranks offered in the Add/Edit form and in the inline rank dropdown. 1 = strongest. */
+/** Ranks each rater can give a player. 1 = strongest. */
 export const RANK_OPTIONS: readonly number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+/**
+ * The people who rate every player. Each gets their own column of rank
+ * dropdowns; a player's Rank is the average of the ratings given so far.
+ * `id` is the storage key — keep it stable when renaming `name`.
+ */
+export const RATERS: readonly { id: string; name: string }[] = [
+  { id: 'adel', name: 'Adel' },
+  { id: 'koshiry', name: 'Koshiry' },
+  { id: 'abdelfattah', name: 'Abdelfattah' },
+];
 
 /** Team-count options offered in the Sort Teams workflow. */
 export const TEAM_COUNT_OPTIONS: readonly number[] = [2, 3, 4, 5];
@@ -23,6 +34,9 @@ export const MIN_PLAYERS_PER_TEAM = 2;
  *  - Rank 1 is the strongest player and always gets the highest score.
  *  - Scores only matter relative to each other; totals are compared between teams.
  *
+ *  - Ranks may be fractional (an average of several ratings, e.g. 2.33); every
+ *    mapping below is continuous, so 2.33 scores between 2 and 3.
+ *
  * `linear` (default): score = 10 × (maxRank + 1 − rank) → 100, 90, 80 … 10.
  *   Every rank step is worth the same, which matches how most organisers think
  *   about a 1–10 rating ("one level better"). It keeps weaker players relevant:
@@ -31,8 +45,7 @@ export const MIN_PLAYERS_PER_TEAM = 2;
  * `inverse`: score = 100 / rank → 100, 50, 33.3, 25 … 10.
  *   Very steep at the top (rank 1 is worth double rank 2) and almost flat at the
  *   bottom (rank 9 vs 10 differs by 1.1). It over-emphasises the single best
- *   player and makes the lower ranks nearly indistinguishable, so it is offered
- *   as an option rather than the default.
+ *   player, so it is offered as an option rather than the default.
  *
  * `gentle`: score = 100 × 0.85^(rank − 1) → 100, 85, 72 … 23.
  *   A middle ground: the top of the scale counts a bit more than the bottom.

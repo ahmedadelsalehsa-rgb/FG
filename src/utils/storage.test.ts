@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Player } from '../types';
 import { exportCsv, exportJson, mergePlayers, parseImportFile } from './importExport';
+import { averageRank, makePlayer } from './ratings';
 import { loadPlayers, loadSession, PLAYERS_KEY, savePlayers, saveSession, type KeyValueStore } from './storage';
 
 function memoryStore(): KeyValueStore & { data: Map<string, string> } {
@@ -13,25 +14,40 @@ function memoryStore(): KeyValueStore & { data: Map<string, string> } {
 }
 
 const sample: Player[] = [
-  { id: 'a', name: 'Ali', rank: 1 },
-  { id: 'b', name: 'Bilal, Jr.', rank: 4 },
-  { id: 'c', name: 'Chris "CJ" Jones', rank: 10 },
+  makePlayer('a', 'Ali', { adel: 1, koshiry: 2, abdelfattah: 1 }),
+  makePlayer('b', 'Bilal, Jr.', { adel: 4, koshiry: null, abdelfattah: 5 }),
+  makePlayer('c', 'Chris "CJ" Jones', { adel: null, koshiry: 10, abdelfattah: null }),
 ];
+
+describe('ratings', () => {
+  it('averages the ratings that were given and ignores empty ones', () => {
+    expect(averageRank({ adel: 1, koshiry: 2, abdelfattah: 1 })).toBe(1.33);
+    expect(averageRank({ adel: 4, koshiry: null, abdelfattah: 5 })).toBe(4.5);
+    expect(averageRank({ adel: null, koshiry: null, abdelfattah: null })).toBeNull();
+  });
+
+  it('derives the rank from ratings and drops unknown raters or invalid values', () => {
+    const p = makePlayer('x', 'X', { adel: 3, koshiry: 11, someoneElse: 1 } as Player['ratings']);
+    expect(p.ratings).toEqual({ adel: 3, koshiry: null, abdelfattah: null });
+    expect(p.rank).toBe(3);
+  });
+});
 
 describe('storage', () => {
   it('saved players survive a reload (simulated refresh)', () => {
     const store = memoryStore();
     expect(savePlayers(sample, store)).toBe(true);
-    // A refresh = a fresh read from the same storage.
     expect(loadPlayers(store)).toEqual(sample);
   });
 
-  it('a rank change is persisted', () => {
+  it('a rating change is persisted and updates the average', () => {
     const store = memoryStore();
     savePlayers(sample, store);
-    const updated = loadPlayers(store).map((p) => (p.id === 'b' ? { ...p, rank: 2 } : p));
+    const updated = loadPlayers(store).map((p) =>
+      p.id === 'b' ? makePlayer(p.id, p.name, { ...p.ratings, koshiry: 3 }) : p,
+    );
     savePlayers(updated, store);
-    expect(loadPlayers(store).find((p) => p.id === 'b')!.rank).toBe(2);
+    expect(loadPlayers(store).find((p) => p.id === 'b')!.rank).toBe(4);
   });
 
   it('recovers from corrupted or missing data', () => {
@@ -39,11 +55,18 @@ describe('storage', () => {
     expect(loadPlayers(store)).toEqual([]);
     store.setItem(PLAYERS_KEY, '{not json');
     expect(loadPlayers(store)).toEqual([]);
-    store.setItem(PLAYERS_KEY, JSON.stringify([{ name: 'Ok', rank: 3 }, { name: '', rank: 2 }, { name: 'Bad', rank: 99 }]));
+    store.setItem(PLAYERS_KEY, JSON.stringify([{ name: 'Ok', ratings: { adel: 3 } }, { name: '' }, 5]));
     const loaded = loadPlayers(store);
     expect(loaded.map((p) => p.name)).toEqual(['Ok']);
+    expect(loaded[0].rank).toBe(3);
     expect(loaded[0].id).toBeTruthy();
     expect(loadPlayers(null)).toEqual([]);
+  });
+
+  it('ignores the old single "rank" field', () => {
+    const store = memoryStore();
+    store.setItem(PLAYERS_KEY, JSON.stringify([{ id: 'o', name: 'Old', rank: 4 }]));
+    expect(loadPlayers(store)[0].rank).toBeNull();
   });
 
   it('reports failure when storage refuses to save', () => {
@@ -65,63 +88,57 @@ describe('storage', () => {
 });
 
 describe('import / export', () => {
+  const asImported = sample.map(({ name, ratings }) => ({ name, ratings }));
+
   it('round-trips JSON', () => {
     const parsed = parseImportFile('players.json', exportJson(sample));
-    expect(parsed.players).toEqual(sample.map(({ name, rank }) => ({ name, rank })));
+    expect(parsed.players).toEqual(asImported);
     expect(parsed.warnings).toEqual([]);
   });
 
   it('round-trips CSV, including commas and quotes in names', () => {
-    const parsed = parseImportFile('players.csv', exportCsv(sample));
-    expect(parsed.players).toEqual(sample.map(({ name, rank }) => ({ name, rank })));
+    const csv = exportCsv(sample);
+    expect(csv.split('\n')[0]).toBe('name,Adel,Koshiry,Abdelfattah,average');
+    const parsed = parseImportFile('players.csv', csv);
+    expect(parsed.players).toEqual(asImported);
+    expect(parsed.warnings).toEqual([]);
   });
 
-  it('accepts a plain JSON array and headerless CSV', () => {
-    expect(parseImportFile('x.json', '[{"name":"A","rank":2}]').players).toEqual([{ name: 'A', rank: 2 }]);
-    expect(parseImportFile('x.csv', 'Sam,3\r\nLee,5\r\n').players).toEqual([
-      { name: 'Sam', rank: 3 },
-      { name: 'Lee', rank: 5 },
+  it('reads rater columns by name in any order and case', () => {
+    const parsed = parseImportFile('x.csv', 'Koshiry,NAME,adel\n2,Sam,\n,Lee,7\n');
+    expect(parsed.players).toEqual([
+      { name: 'Sam', ratings: { adel: null, koshiry: 2, abdelfattah: null } },
+      { name: 'Lee', ratings: { adel: 7, koshiry: null, abdelfattah: null } },
     ]);
   });
 
-  it('skips invalid rows with warnings and rejects broken files', () => {
-    const parsed = parseImportFile('x.csv', 'name,rank\nA,1\n,2\nB,11\na,3\n');
-    expect(parsed.players).toEqual([{ name: 'A', rank: 1 }]);
+  it('accepts a names-only list (everything unrated)', () => {
+    const parsed = parseImportFile('x.csv', 'name\nAbdelfattah\nTarek\n');
+    expect(parsed.players.map((p) => p.name)).toEqual(['Abdelfattah', 'Tarek']);
+    expect(parsed.players.every((p) => Object.values(p.ratings).every((v) => v === null))).toBe(true);
+    const flat = parseImportFile('x.json', '[{"name":"Hassan","Adel":2}]');
+    expect(flat.players[0].ratings.adel).toBe(2);
+  });
+
+  it('warns about invalid ranks and duplicate names, and rejects broken files', () => {
+    const parsed = parseImportFile('x.csv', 'name,adel\nA,1\n,2\nB,11\na,3\n');
+    expect(parsed.players.map((p) => p.name)).toEqual(['A', 'B']);
+    expect(parsed.players[1].ratings.adel).toBeNull();
     expect(parsed.warnings).toHaveLength(3);
     expect(() => parseImportFile('x.json', '{oops')).toThrow(/valid JSON/);
     expect(() => parseImportFile('x.csv', '   ')).toThrow(/empty/);
     expect(() => parseImportFile('x.json', '{"foo":1}')).toThrow(/No player list/);
   });
 
-  it('keeps players whose rank is left empty, as unranked', () => {
-    const csv = parseImportFile('x.csv', 'name,rank\nAbdelfattah,\nTarek,3\n');
-    expect(csv.players).toEqual([
-      { name: 'Abdelfattah', rank: null },
-      { name: 'Tarek', rank: 3 },
-    ]);
-    expect(csv.warnings).toEqual([]);
-    const json = parseImportFile('x.json', '[{"name":"Hassan","rank":null},{"name":"Yasser"}]');
-    expect(json.players).toEqual([
-      { name: 'Hassan', rank: null },
-      { name: 'Yasser', rank: null },
-    ]);
-    const store = memoryStore();
-    savePlayers([{ id: 'u', name: 'Hassan', rank: null }], store);
-    expect(loadPlayers(store)).toEqual([{ id: 'u', name: 'Hassan', rank: null }]);
-  });
-
-  it('an empty rank in an import never wipes an existing rank', () => {
-    const merged = mergePlayers(sample, [{ name: 'Ali', rank: null }]);
-    expect(merged.find((p) => p.id === 'a')!.rank).toBe(1);
-  });
-
-  it('merges by name (case-insensitive), updating ranks and adding new players', () => {
+  it('merges by name: fills ratings, never wipes existing ones with empty cells, adds new players', () => {
     const merged = mergePlayers(sample, [
-      { name: 'ali', rank: 3 },
-      { name: 'New Guy', rank: 6 },
+      { name: 'ali', ratings: { adel: 3, koshiry: null, abdelfattah: null } },
+      { name: 'New Guy', ratings: { adel: null, koshiry: 6, abdelfattah: null } },
     ]);
     expect(merged).toHaveLength(4);
-    expect(merged.find((p) => p.id === 'a')!.rank).toBe(3);
+    const ali = merged.find((p) => p.id === 'a')!;
+    expect(ali.ratings).toEqual({ adel: 3, koshiry: 2, abdelfattah: 1 });
+    expect(ali.rank).toBe(2);
     expect(merged.find((p) => p.name === 'New Guy')!.rank).toBe(6);
   });
 });

@@ -773,7 +773,74 @@ select[aria-invalid='true'] {
 
 .rank-select {
   width: auto;
-  min-width: 72px;
+  min-width: 64px;
+}
+
+.rank-badge.rank-badge-wide {
+  width: auto;
+  min-width: 2rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.rater-col {
+  white-space: nowrap;
+}
+
+.players-table th.rater-col,
+.players-table th.avg-col {
+  text-align: center;
+}
+
+.players-table td.rater-col,
+.players-table td.avg-col {
+  text-align: center;
+}
+
+.avg-rank {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.avg-rank strong {
+  font-size: 1.05rem;
+  color: var(--accent-ink);
+}
+
+.avg-count {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.rater-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.rater-fields legend {
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 0.35rem;
+}
+
+.rater-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.6rem;
+}
+
+.rater-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 .actions-col {
@@ -1330,6 +1397,81 @@ select[aria-invalid='true'] {
     padding: 0.5rem 0.35rem;
   }
 
+  .players-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .players-table,
+  .players-table tbody {
+    display: block;
+  }
+
+  .players-table tr {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    grid-template-areas:
+      'name name name avg'
+      'r1 r2 r3 avg'
+      'actions actions actions actions';
+    gap: 0.35rem 0.5rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .players-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .players-table td {
+    display: block;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .players-table td.name-td {
+    grid-area: name;
+  }
+
+  .players-table td.avg-col {
+    grid-area: avg;
+    align-self: center;
+    min-width: 3.2rem;
+  }
+
+  .players-table td.rater-col:nth-child(2) {
+    grid-area: r1;
+  }
+
+  .players-table td.rater-col:nth-child(3) {
+    grid-area: r2;
+  }
+
+  .players-table td.rater-col:nth-child(4) {
+    grid-area: r3;
+  }
+
+  .players-table td.rater-col::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: left;
+  }
+
+  .players-table td.rater-col .rank-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .players-table td.actions-col {
+    grid-area: actions;
+    width: auto;
+  }
+
   .name-cell .rank-badge {
     display: none;
   }
@@ -1339,9 +1481,7 @@ select[aria-invalid='true'] {
   }
 
   .row-actions {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0;
+    justify-content: flex-start;
   }
 
   .players-table .btn-sm {

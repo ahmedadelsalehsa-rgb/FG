@@ -1,7 +1,15 @@
+/** One rank (1 = strongest) per rater id; null = that rater has not rated the player yet. */
+export type Ratings = Record<string, number | null>;
+
 export interface Player {
   id: string;
   name: string;
-  /** null = not ranked yet (e.g. imported without a rank). Unranked players cannot join a game. */
+  ratings: Ratings;
+  /**
+   * Average of the ratings given so far — always derived from `ratings`, never
+   * edited directly. null = nobody has rated the player yet; such a player
+   * cannot join a game.
+   */
   rank: number | null;
 }
 

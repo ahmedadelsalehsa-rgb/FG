@@ -5,11 +5,11 @@ import { createRng, shuffled } from './random';
 import { balanceTeams, summarizeFairness, teamSizes, teamStrength } from './teamBalancer';
 
 function makePlayers(ranks: number[], prefix = 'P'): Player[] {
-  return ranks.map((rank, i) => ({ id: `${prefix}${i + 1}`, name: `${prefix}${i + 1}`, rank }));
+  return ranks.map((rank, i) => ({ id: `${prefix}${i + 1}`, name: `${prefix}${i + 1}`, ratings: {}, rank }));
 }
 
 function rankCounts(result: TeamResult, rank: number): number[] {
-  return result.teams.map((t) => t.players.filter((p) => p.rank === rank).length);
+  return result.teams.map((t) => t.players.filter((p) => Math.round(p.rank) === rank).length);
 }
 
 function sizes(result: TeamResult): number[] {
@@ -248,6 +248,16 @@ describe('balanceTeams vs naive allocations', () => {
     const result = balanceTeams(players, 3);
     expect(result.strengthDifference).toBe(0);
     expect(rankCounts(result, 1)).toEqual([1, 1, 1]);
+  });
+});
+
+describe('averaged (fractional) ranks', () => {
+  it('spreads players by their nearest whole rank and balances exact strength', () => {
+    const players = makePlayers([1, 1.33, 0.67 + 0.33, 2.5, 2.67, 3, 4.33, 5, 5.5, 7, 8.67, 9]);
+    const result = balanceTeams(players, 3);
+    expectExactlyOnce(result, players);
+    expect(rankCounts(result, 1)).toEqual([1, 1, 1]);
+    expect(result.strengthDifference).toBeLessThanOrEqual(15);
   });
 });
 

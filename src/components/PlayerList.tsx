@@ -1,5 +1,5 @@
 import { useId, useMemo, useRef, useState, type ChangeEvent } from 'react';
-import { RANK_OPTIONS } from '../config';
+import { RANK_OPTIONS, RATERS } from '../config';
 import type { PlayersApi } from '../hooks/usePlayers';
 import type { Player } from '../types';
 import {
@@ -11,9 +11,9 @@ import {
   type ParseResult,
 } from '../utils/importExport';
 import { getDownloads } from '../platform';
+import { formatRank, ratingCount } from '../utils/ratings';
 import { ConfirmDialog, Modal } from './Modal';
 import { PlayerForm } from './PlayerForm';
-import { RankBadge } from './RankBadge';
 
 interface PlayerListProps {
   api: PlayersApi;
@@ -55,7 +55,11 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
   const filterId = useId();
 
   const distribution = useMemo(
-    () => RANK_OPTIONS.map((r) => ({ rank: r, count: players.filter((p) => p.rank === r).length })),
+    () =>
+      RANK_OPTIONS.map((r) => ({
+        rank: r,
+        count: players.filter((p) => p.rank !== null && Math.round(p.rank) === r).length,
+      })),
     [players],
   );
   const maxCount = Math.max(1, ...distribution.map((d) => d.count));
@@ -67,7 +71,8 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
       .filter(
         (p) =>
           (!q || p.name.toLocaleLowerCase().includes(q)) &&
-          (!rankFilter || (rankFilter === 'none' ? p.rank === null : p.rank === Number(rankFilter))),
+          (!rankFilter ||
+            (rankFilter === 'none' ? p.rank === null : p.rank !== null && Math.round(p.rank) === Number(rankFilter))),
       )
       // Always strongest first (rank 1 at the top); players without a rank go last.
       .sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name));
@@ -108,7 +113,10 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
       <div className="page-head">
         <div>
           <h1 id="players-title">Players</h1>
-          <p className="muted">Your saved squad. Rank 1 is the strongest, {RANK_OPTIONS[RANK_OPTIONS.length - 1]} the weakest.</p>
+          <p className="muted">
+            Each of {RATERS.map((r) => r.name).join(', ')} ranks every player (1 = strongest,{' '}
+            {RANK_OPTIONS[RANK_OPTIONS.length - 1]} = weakest). Rank is the average.
+          </p>
         </div>
         <div className="page-head-actions">
           <button type="button" className="btn btn-primary btn-lg" onClick={openAdd} disabled={readOnly}>
@@ -148,8 +156,8 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
 
       {unrankedCount > 0 && (
         <p className="notice notice-warn rank-needed">
-          {unrankedCount} player{unrankedCount === 1 ? ' has' : 's have'} no rank yet. Pick a rank in the list so{' '}
-          they can be picked for games.{' '}
+          {unrankedCount} player{unrankedCount === 1 ? ' has' : 's have'} no rank yet. At least one person needs to rank{' '}
+          {unrankedCount === 1 ? 'them' : 'each of them'} before they can be picked for games.{' '}
           {rankFilter !== 'none' && (
             <button type="button" className="link" onClick={() => setRankFilter('none')}>
               Show them
@@ -237,7 +245,12 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                 <thead>
                   <tr>
                     <th scope="col">Player</th>
-                    <th scope="col" aria-sort="ascending">
+                    {RATERS.map((r) => (
+                      <th scope="col" key={r.id} className="rater-col">
+                        {r.name}
+                      </th>
+                    ))}
+                    <th scope="col" className="avg-col" aria-sort="ascending">
                       Rank <span aria-hidden="true">▲</span>
                     </th>
                     <th scope="col" className="actions-col">
@@ -248,31 +261,46 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                 <tbody>
                   {visible.map((p) => (
                     <tr key={p.id}>
-                      <td>
+                      <td className="name-td">
                         <div className="name-cell">
-                          <RankBadge rank={p.rank} />
                           <span>{p.name}</span>
                         </div>
                       </td>
-                      <td>
-                        <select
-                          className="rank-select"
-                          value={p.rank ?? ''}
-                          disabled={readOnly}
-                          aria-label={`Rank for ${p.name}`}
-                          onChange={(e) => updatePlayer(p.id, { rank: Number(e.target.value) })}
-                        >
-                          {p.rank === null && (
-                            <option value="" disabled>
-                              Set rank
-                            </option>
-                          )}
-                          {RANK_OPTIONS.map((r) => (
-                            <option key={r} value={r}>
-                              {r}
-                            </option>
-                          ))}
-                        </select>
+                      {RATERS.map((r) => (
+                        <td key={r.id} className="rater-col" data-label={r.name}>
+                          <select
+                            className="rank-select"
+                            value={p.ratings[r.id] ?? ''}
+                            disabled={readOnly}
+                            aria-label={`${r.name}'s rank for ${p.name}`}
+                            onChange={(e) =>
+                              updatePlayer(p.id, {
+                                ratings: { [r.id]: e.target.value ? Number(e.target.value) : null },
+                              })
+                            }
+                          >
+                            <option value="">—</option>
+                            {RANK_OPTIONS.map((n) => (
+                              <option key={n} value={n}>
+                                {n}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                      ))}
+                      <td className="avg-col" data-label="Rank">
+                        {p.rank === null ? (
+                          <span className="muted">—</span>
+                        ) : (
+                          <span className="avg-rank">
+                            <strong>{formatRank(p.rank)}</strong>
+                            {ratingCount(p.ratings) < RATERS.length && (
+                              <span className="avg-count">
+                                {ratingCount(p.ratings)}/{RATERS.length}
+                              </span>
+                            )}
+                          </span>
+                        )}
                       </td>
                       <td className="actions-col">
                         <div className="row-actions">
@@ -365,12 +393,12 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
         player={editing}
         findByName={findByName}
         onClose={() => setFormOpen(false)}
-        onSave={(name, rank) => {
+        onSave={(name, ratings) => {
           if (editing) {
-            updatePlayer(editing.id, { name, rank });
+            updatePlayer(editing.id, { name, ratings });
             notify(`Updated ${name}.`);
           } else {
-            addPlayer(name, rank);
+            addPlayer(name, ratings);
             notify(`Added ${name}.`);
           }
         }}

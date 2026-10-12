@@ -1,7 +1,10 @@
-import { DEFAULT_TEAM_COUNT, RANK_OPTIONS, TEAM_COUNT_OPTIONS } from '../config';
+import { DEFAULT_TEAM_COUNT, TEAM_COUNT_OPTIONS } from '../config';
 import type { Player } from '../types';
+import { makePlayer } from './ratings';
 
-export const PLAYERS_KEY = 'fftg.players.v1';
+export { isValidRank } from './ratings';
+
+export const PLAYERS_KEY = 'fftg.players.v2';
 export const SESSION_KEY = 'fftg.session.v1';
 
 export interface SavedSession {
@@ -25,24 +28,23 @@ export function newId(): string {
   return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
-export function isValidRank(rank: unknown): rank is number {
-  return typeof rank === 'number' && RANK_OPTIONS.includes(rank);
-}
-
-/** Keeps only well-formed player records; drops anything malformed. */
+/**
+ * Keeps only well-formed player records; drops anything malformed. The average
+ * `rank` is always recomputed from `ratings` (an old single `rank` field from
+ * earlier versions is ignored).
+ */
 export function sanitizePlayers(value: unknown): Player[] {
   if (!Array.isArray(value)) return [];
   const seen = new Set<string>();
   const out: Player[] = [];
   for (const item of value) {
     if (!item || typeof item !== 'object') continue;
-    const { id, name, rank } = item as Record<string, unknown>;
+    const { id, name, ratings } = item as Record<string, unknown>;
     if (typeof name !== 'string' || !name.trim()) continue;
-    if (rank != null && !isValidRank(rank)) continue;
     let pid = typeof id === 'string' && id ? id : newId();
     if (seen.has(pid)) pid = newId();
     seen.add(pid);
-    out.push({ id: pid, name: name.trim(), rank: (rank as number | null | undefined) ?? null });
+    out.push(makePlayer(pid, name.trim(), (ratings ?? {}) as Player['ratings']));
   }
   return out;
 }

@@ -1,13 +1,14 @@
 import { useEffect, useId, useState, type FormEvent } from 'react';
-import { RANK_OPTIONS } from '../config';
-import type { Player } from '../types';
+import { RANK_OPTIONS, RATERS } from '../config';
+import type { Player, Ratings } from '../types';
+import { averageRank, emptyRatings, formatRank } from '../utils/ratings';
 import { Modal } from './Modal';
 
 interface PlayerFormProps {
   open: boolean;
   /** Player being edited; undefined when adding a new player. */
   player?: Player;
-  onSave: (name: string, rank: number) => void;
+  onSave: (name: string, ratings: Ratings) => void;
   onClose: () => void;
   findByName: (name: string, exceptId?: string) => Player | undefined;
 }
@@ -16,15 +17,15 @@ export const MAX_NAME_LENGTH = 40;
 
 export function PlayerForm({ open, player, onSave, onClose, findByName }: PlayerFormProps) {
   const [name, setName] = useState('');
-  const [rank, setRank] = useState('');
+  const [ratings, setRatings] = useState<Ratings>(emptyRatings);
   const [submitted, setSubmitted] = useState(false);
   const nameId = useId();
-  const rankId = useId();
+  const ratingsId = useId();
 
   useEffect(() => {
     if (open) {
       setName(player?.name ?? '');
-      setRank(player?.rank != null ? String(player.rank) : '');
+      setRatings(player ? { ...player.ratings } : emptyRatings());
       setSubmitted(false);
     }
   }, [open, player]);
@@ -36,18 +37,17 @@ export function PlayerForm({ open, player, onSave, onClose, findByName }: Player
     : duplicate
       ? `A player called "${duplicate.name}" already exists. Use a different name (e.g. add an initial).`
       : '';
-  const rankError = rank ? '' : 'Please choose a rank.';
+  const avg = averageRank(ratings);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    if (nameError || rankError) return;
-    onSave(trimmed, Number(rank));
+    if (nameError) return;
+    onSave(trimmed, ratings);
     onClose();
   };
 
   const showName = (submitted || duplicate) && nameError;
-  const showRank = submitted && rankError;
 
   return (
     <Modal open={open} title={player ? 'Edit player' : 'Add new player'} onClose={onClose}>
@@ -73,35 +73,34 @@ export function PlayerForm({ open, player, onSave, onClose, findByName }: Player
             </p>
           )}
         </div>
-        <div className="field">
-          <label htmlFor={rankId}>Rank</label>
-          <select
-            id={rankId}
-            value={rank}
-            required
-            aria-invalid={!!showRank}
-            aria-describedby={`${rankId}-hint${showRank ? ` ${rankId}-err` : ''}`}
-            onChange={(e) => setRank(e.target.value)}
-          >
-            <option value="" disabled>
-              Choose a rank…
-            </option>
-            {RANK_OPTIONS.map((r) => (
-              <option key={r} value={r}>
-                {r}
-                {r === RANK_OPTIONS[0] ? ' (strongest)' : r === RANK_OPTIONS[RANK_OPTIONS.length - 1] ? ' (weakest)' : ''}
-              </option>
+        <fieldset className="field rater-fields" aria-describedby={`${ratingsId}-hint`}>
+          <legend>Ranks</legend>
+          <div className="rater-grid">
+            {RATERS.map((r) => (
+              <label key={r.id} className="rater-field">
+                <span>{r.name}</span>
+                <select
+                  value={ratings[r.id] ?? ''}
+                  onChange={(e) =>
+                    setRatings((cur) => ({ ...cur, [r.id]: e.target.value ? Number(e.target.value) : null }))
+                  }
+                >
+                  <option value="">—</option>
+                  {RANK_OPTIONS.map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </label>
             ))}
-          </select>
-          <p id={`${rankId}-hint`} className="field-hint">
-            Rank 1 is the strongest player; higher numbers are weaker.
+          </div>
+          <p id={`${ratingsId}-hint`} className="field-hint">
+            Rank {RANK_OPTIONS[0]} is the strongest, {RANK_OPTIONS[RANK_OPTIONS.length - 1]} the weakest. Each person
+            can leave theirs empty and fill it in later. Average rank:{' '}
+            <strong>{avg === null ? 'not rated yet' : formatRank(avg)}</strong>
           </p>
-          {showRank && (
-            <p id={`${rankId}-err`} className="field-error" role="alert">
-              {rankError}
-            </p>
-          )}
-        </div>
+        </fieldset>
         <div className="modal-actions">
           <button type="button" className="btn btn-secondary" onClick={onClose}>
             Cancel
