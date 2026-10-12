@@ -762,17 +762,6 @@ select[aria-invalid='true'] {
   border-bottom: 0;
 }
 
-.th-sort {
-  background: none;
-  border: 0;
-  padding: 0.25rem 0;
-  font: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
 .name-cell {
   display: flex;
   align-items: center;
@@ -1033,10 +1022,28 @@ select[aria-invalid='true'] {
   border-color: var(--pitch-500);
 }
 
-.check-item.disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-  border-style: dashed;
+.check-item.invalid {
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.check-error {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.notice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.generate-step .notice + .notice,
+.generate-step .notice + p {
+  margin-top: 0.6rem;
 }
 
 .small {

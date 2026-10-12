@@ -30,6 +30,7 @@ export function TeamSelection({
   const [query, setQuery] = useState('');
   const searchId = useId();
   const countHelpId = useId();
+  const rankErrorId = useId();
 
   const sorted = useMemo(
     () => [...players].sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name)),
@@ -40,11 +41,12 @@ export function TeamSelection({
     return q ? sorted.filter((p) => p.name.toLocaleLowerCase().includes(q)) : sorted;
   }, [sorted, query]);
 
-  const selectedCount = players.filter((p) => isRanked(p) && selectedIds.has(p.id)).length;
-  const rankedCount = players.filter(isRanked).length;
-  const unranked = players.length - rankedCount;
+  const selected = sorted.filter((p) => selectedIds.has(p.id));
+  const selectedCount = selected.length;
+  const selectedUnranked = selected.filter((p) => !isRanked(p));
   const min = minimumPlayers(teamCount);
   const tooFew = selectedCount < min;
+  const blocked = tooFew || selectedUnranked.length > 0;
   const sizes = teamSizes(selectedCount, teamCount);
   const sizeText =
     sizes[0] === sizes[sizes.length - 1]
@@ -130,7 +132,7 @@ export function TeamSelection({
             <button
               type="button"
               className="btn btn-secondary btn-sm"
-              onClick={() => setMany(visible.filter(isRanked).map((p) => p.id), true)}
+              onClick={() => setMany(visible.map((p) => p.id), true)}
             >
               Select All{query ? ' shown' : ''}
             </button>
@@ -144,39 +146,31 @@ export function TeamSelection({
           </div>
         </div>
 
-        <span id={`${searchId}-unranked`} hidden>
-          No rank yet
-        </span>
         <p className="selected-count" aria-live="polite">
-          <strong>{selectedCount}</strong> of {rankedCount} players selected
+          <strong>{selectedCount}</strong> of {players.length} players selected
         </p>
-        {unranked > 0 && (
-          <p className="muted small">
-            {unranked} player{unranked === 1 ? '' : 's'} without a rank can’t be picked yet.{' '}
-            <button type="button" className="link" onClick={onManagePlayers}>
-              Set ranks on the Players page
-            </button>
-          </p>
-        )}
 
         {visible.length === 0 ? (
           <p className="empty-inline muted">No players match “{query}”.</p>
         ) : (
           <ul className="check-list">
             {visible.map((p) => {
-              const ranked = isRanked(p);
-              const checked = ranked && selectedIds.has(p.id);
+              const checked = selectedIds.has(p.id);
+              const missingRank = checked && !isRanked(p);
               return (
                 <li key={p.id}>
-                  <label className={`check-item${checked ? ' checked' : ''}${ranked ? '' : ' disabled'}`}>
+                  <label className={`check-item${checked ? ' checked' : ''}${missingRank ? ' invalid' : ''}`}>
                     <input
                       type="checkbox"
                       checked={checked}
-                      disabled={!ranked}
-                      aria-describedby={ranked ? undefined : `${searchId}-unranked`}
+                      aria-invalid={missingRank || undefined}
+                      aria-describedby={missingRank ? rankErrorId : undefined}
                       onChange={() => toggle(p.id)}
                     />
-                    <span className="check-name">{p.name}</span>
+                    <span className="check-name">
+                      {p.name}
+                      {missingRank && <span className="check-error">No rank</span>}
+                    </span>
                     <RankBadge rank={p.rank} />
                   </label>
                 </li>
@@ -193,6 +187,35 @@ export function TeamSelection({
           </span>
           Generate teams
         </h2>
+        {selectedUnranked.length > 0 && (
+          <div id={rankErrorId} className="notice notice-error" role="alert">
+            <p>
+              {selectedUnranked.length === 1 ? (
+                <>
+                  <strong>{selectedUnranked[0].name}</strong> has no rank.
+                </>
+              ) : (
+                <>
+                  {selectedUnranked.length} selected players have no rank:{' '}
+                  <strong>{selectedUnranked.map((p) => p.name).join(', ')}</strong>.
+                </>
+              )}{' '}
+              Teams can only be balanced when every selected player has a rank.
+            </p>
+            <div className="notice-actions">
+              <button type="button" className="btn btn-secondary btn-sm" onClick={onManagePlayers}>
+                Set ranks on the Players page
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={() => setMany(selectedUnranked.map((p) => p.id), false)}
+              >
+                Deselect {selectedUnranked.length === 1 ? 'this player' : 'these players'}
+              </button>
+            </div>
+          </div>
+        )}
         {tooFew ? (
           <p id={countHelpId} className="notice notice-warn" role="status">
             {selectedCount === 0
@@ -209,8 +232,8 @@ export function TeamSelection({
         <button
           type="button"
           className="btn btn-accent btn-lg btn-block"
-          disabled={tooFew}
-          aria-describedby={countHelpId}
+          disabled={blocked}
+          aria-describedby={selectedUnranked.length > 0 ? `${countHelpId} ${rankErrorId}` : countHelpId}
           onClick={onGenerate}
         >
           Generate Teams

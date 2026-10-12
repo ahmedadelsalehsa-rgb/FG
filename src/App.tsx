@@ -50,7 +50,14 @@ export default function App() {
 
   const generate = (seed: number, avoidSignature?: string) => {
     // Always use the current player data, so rank changes are reflected immediately.
-    const chosen = players.filter(isRanked).filter((p) => selectedIds.has(p.id));
+    const picked = players.filter((p) => selectedIds.has(p.id));
+    const unranked = picked.filter((p) => !isRanked(p));
+    if (unranked.length) {
+      notify(`Set a rank for ${unranked.map((p) => p.name).join(', ')} before generating teams.`, 'error');
+      setStep('select');
+      return;
+    }
+    const chosen = picked.filter(isRanked);
     if (chosen.length < minimumPlayers(teamCount)) {
       notify(`Select at least ${minimumPlayers(teamCount)} players for ${teamCount} teams.`, 'error');
       setStep('select');

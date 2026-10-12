@@ -21,7 +21,6 @@ interface PlayerListProps {
   notify: (message: string, kind?: 'success' | 'error') => void;
 }
 
-type SortKey = 'name' | 'rank';
 
 async function download(fileName: string, content: string, type: string) {
   const downloads = await getDownloads();
@@ -47,7 +46,6 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
   const { players, updatePlayer, deletePlayer, addPlayer, replaceAll, findByName, mode, readOnly } = api;
   const [query, setQuery] = useState('');
   const [rankFilter, setRankFilter] = useState('');
-  const [sortKey, setSortKey] = useState<SortKey>('rank');
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<Player | undefined>();
   const [toDelete, setToDelete] = useState<Player | undefined>();
@@ -71,12 +69,9 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
           (!q || p.name.toLocaleLowerCase().includes(q)) &&
           (!rankFilter || (rankFilter === 'none' ? p.rank === null : p.rank === Number(rankFilter))),
       )
-      .sort((a, b) =>
-        sortKey === 'rank'
-          ? (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name)
-          : a.name.localeCompare(b.name),
-      );
-  }, [players, query, rankFilter, sortKey]);
+      // Always strongest first (rank 1 at the top); players without a rank go last.
+      .sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name));
+  }, [players, query, rankFilter]);
 
   const openAdd = () => {
     setEditing(undefined);
@@ -241,15 +236,9 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
               <table className="players-table">
                 <thead>
                   <tr>
-                    <th scope="col" aria-sort={sortKey === 'name' ? 'ascending' : 'none'}>
-                      <button type="button" className="th-sort" onClick={() => setSortKey('name')}>
-                        Player {sortKey === 'name' && <span aria-hidden="true">▲</span>}
-                      </button>
-                    </th>
-                    <th scope="col" aria-sort={sortKey === 'rank' ? 'ascending' : 'none'}>
-                      <button type="button" className="th-sort" onClick={() => setSortKey('rank')}>
-                        Rank {sortKey === 'rank' && <span aria-hidden="true">▲</span>}
-                      </button>
+                    <th scope="col">Player</th>
+                    <th scope="col" aria-sort="ascending">
+                      Rank <span aria-hidden="true">▲</span>
                     </th>
                     <th scope="col" className="actions-col">
                       Actions
