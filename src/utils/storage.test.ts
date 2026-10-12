@@ -98,14 +98,14 @@ describe('import / export', () => {
 
   it('round-trips CSV, including commas and quotes in names', () => {
     const csv = exportCsv(sample);
-    expect(csv.split('\n')[0]).toBe('name,Adel,Koshiry,Abdelfattah,average');
+    expect(csv.split('\n')[0]).toBe('name,Adel,Qoshiry,Abdelfattah,average');
     const parsed = parseImportFile('players.csv', csv);
     expect(parsed.players).toEqual(asImported);
     expect(parsed.warnings).toEqual([]);
   });
 
   it('reads rater columns by name in any order and case', () => {
-    const parsed = parseImportFile('x.csv', 'Koshiry,NAME,adel\n2,Sam,\n,Lee,7\n');
+    const parsed = parseImportFile('x.csv', 'Qoshiry,NAME,adel\n2,Sam,\n,Lee,7\n');
     expect(parsed.players).toEqual([
       { name: 'Sam', ratings: { adel: null, koshiry: 2, abdelfattah: null } },
       { name: 'Lee', ratings: { adel: 7, koshiry: null, abdelfattah: null } },

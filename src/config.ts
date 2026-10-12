@@ -16,7 +16,7 @@ export const RANK_OPTIONS: readonly number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  */
 export const RATERS: readonly { id: string; name: string }[] = [
   { id: 'adel', name: 'Adel' },
-  { id: 'koshiry', name: 'Koshiry' },
+  { id: 'koshiry', name: 'Qoshiry' },
   { id: 'abdelfattah', name: 'Abdelfattah' },
 ];
 
