@@ -30,4 +30,21 @@ ${fonts}
 const outDir = join(root, 'dist-artifact');
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, 'fair-football.html'), page);
-console.log(`Wrote dist-artifact/fair-football.html (${(page.length / 1024).toFixed(0)} KB)`);
+// The same page as a complete document, for opening directly from disk or emailing.
+// Opened this way there is no shared database, so the list is kept in that browser.
+const head = page.slice(0, page.indexOf('<div id="root">'));
+const standalone = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f3d2e">
+${head}</head>
+<body>
+<div id="root"></div>
+<script type="module">${js}</script>
+</body>
+</html>
+`;
+writeFileSync(join(outDir, 'fair-football-standalone.html'), standalone);
+console.log(`Wrote dist-artifact/fair-football.html and dist-artifact/fair-football-standalone.html (${(page.length / 1024).toFixed(0)} KB)`);
