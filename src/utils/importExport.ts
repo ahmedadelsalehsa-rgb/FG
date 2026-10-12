@@ -4,7 +4,8 @@ import { isValidRank, newId } from './storage';
 
 export interface ImportedPlayer {
   name: string;
-  rank: number;
+  /** null when the file leaves the rank empty; it is set later in the app. */
+  rank: number | null;
 }
 
 export interface ParseResult {
@@ -35,7 +36,7 @@ function csvCell(value: string): string {
 }
 
 export function exportCsv(players: Player[]): string {
-  return ['name,rank', ...players.map((p) => `${csvCell(p.name)},${p.rank}`)].join('\n') + '\n';
+  return ['name,rank', ...players.map((p) => `${csvCell(p.name)},${p.rank ?? ''}`)].join('\n') + '\n';
 }
 
 /** Splits CSV text into rows of cells, honouring quoted cells. */
@@ -83,12 +84,13 @@ function collect(entries: { name: unknown; rank: unknown; where: string }[]): Pa
   const seen = new Set<string>();
   for (const { name, rank, where } of entries) {
     const n = typeof name === 'string' ? name.trim().replace(/\s+/g, ' ') : '';
-    const r = typeof rank === 'string' ? Number(rank.trim()) : rank;
+    const blank = rank == null || (typeof rank === 'string' && rank.trim() === '');
+    const r = blank ? null : typeof rank === 'string' ? Number(rank.trim()) : rank;
     if (!n) {
       warnings.push(`${where}: missing name — skipped.`);
       continue;
     }
-    if (!isValidRank(r)) {
+    if (r !== null && !isValidRank(r)) {
       warnings.push(
         `${where}: "${n}" has an invalid rank (${String(rank)}); allowed ranks are ${RANK_OPTIONS[0]}–${RANK_OPTIONS[RANK_OPTIONS.length - 1]} — skipped.`,
       );
@@ -162,7 +164,7 @@ export function mergePlayers(existing: Player[], imported: ImportedPlayer[]): Pl
     const match = byName.get(normalizeName(imp.name));
     if (match) {
       const target = result.find((p) => p.id === match.id)!;
-      target.rank = imp.rank;
+      if (imp.rank !== null) target.rank = imp.rank; // an empty rank never wipes an existing one
     } else {
       result.push({ id: newId(), name: imp.name, rank: imp.rank });
     }

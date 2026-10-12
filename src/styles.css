@@ -1033,6 +1033,22 @@ select[aria-invalid='true'] {
   border-color: var(--pitch-500);
 }
 
+.check-item.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  border-style: dashed;
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+.rank-badge.unranked {
+  background: transparent;
+  color: var(--muted);
+  border: 2px dashed var(--input-border);
+}
+
 .check-item input {
   width: 1.25rem;
   height: 1.25rem;

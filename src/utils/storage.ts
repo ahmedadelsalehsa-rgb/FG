@@ -37,11 +37,12 @@ export function sanitizePlayers(value: unknown): Player[] {
   for (const item of value) {
     if (!item || typeof item !== 'object') continue;
     const { id, name, rank } = item as Record<string, unknown>;
-    if (typeof name !== 'string' || !name.trim() || !isValidRank(rank)) continue;
+    if (typeof name !== 'string' || !name.trim()) continue;
+    if (rank != null && !isValidRank(rank)) continue;
     let pid = typeof id === 'string' && id ? id : newId();
     if (seen.has(pid)) pid = newId();
     seen.add(pid);
-    out.push({ id: pid, name: name.trim(), rank });
+    out.push({ id: pid, name: name.trim(), rank: (rank as number | null | undefined) ?? null });
   }
   return out;
 }

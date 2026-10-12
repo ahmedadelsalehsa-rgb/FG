@@ -6,7 +6,14 @@ function rankPosition(rank: number): number {
   return (pos < 0 ? RANK_OPTIONS.length - 1 : pos) / Math.max(1, RANK_OPTIONS.length - 1);
 }
 
-export function RankBadge({ rank }: { rank: number }) {
+export function RankBadge({ rank }: { rank: number | null }) {
+  if (rank === null) {
+    return (
+      <span className="rank-badge unranked" title="No rank yet" aria-label="No rank yet">
+        ?
+      </span>
+    );
+  }
   const strength = Math.round(100 - rankPosition(rank) * 88); // 100% → 12% pitch green
   return (
     <span

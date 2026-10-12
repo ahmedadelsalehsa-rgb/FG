@@ -61,13 +61,20 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
     [players],
   );
   const maxCount = Math.max(1, ...distribution.map((d) => d.count));
+  const unrankedCount = players.filter((p) => p.rank === null).length;
 
   const visible = useMemo(() => {
     const q = query.trim().toLocaleLowerCase();
     return players
-      .filter((p) => (!q || p.name.toLocaleLowerCase().includes(q)) && (!rankFilter || p.rank === Number(rankFilter)))
+      .filter(
+        (p) =>
+          (!q || p.name.toLocaleLowerCase().includes(q)) &&
+          (!rankFilter || (rankFilter === 'none' ? p.rank === null : p.rank === Number(rankFilter))),
+      )
       .sort((a, b) =>
-        sortKey === 'rank' ? a.rank - b.rank || a.name.localeCompare(b.name) : a.name.localeCompare(b.name),
+        sortKey === 'rank'
+          ? (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name)
+          : a.name.localeCompare(b.name),
       );
   }, [players, query, rankFilter, sortKey]);
 
@@ -144,6 +151,18 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
         </div>
       )}
 
+      {unrankedCount > 0 && (
+        <p className="notice notice-warn rank-needed">
+          {unrankedCount} player{unrankedCount === 1 ? ' has' : 's have'} no rank yet. Pick a rank in the list so{' '}
+          they can be picked for games.{' '}
+          {rankFilter !== 'none' && (
+            <button type="button" className="link" onClick={() => setRankFilter('none')}>
+              Show them
+            </button>
+          )}
+        </p>
+      )}
+
       {players.length === 0 && mode === 'connecting' ? (
         <div className="empty card" aria-busy="true">
           <p className="muted">Loading the player list…</p>
@@ -193,6 +212,7 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
               </label>
               <select id={filterId} value={rankFilter} onChange={(e) => setRankFilter(e.target.value)}>
                 <option value="">All ranks</option>
+                {unrankedCount > 0 && <option value="none">No rank yet ({unrankedCount})</option>}
                 {RANK_OPTIONS.map((r) => (
                   <option key={r} value={r}>
                     Rank {r}
@@ -248,11 +268,16 @@ export function PlayerList({ api, onSortTeams, notify }: PlayerListProps) {
                       <td>
                         <select
                           className="rank-select"
-                          value={p.rank}
+                          value={p.rank ?? ''}
                           disabled={readOnly}
                           aria-label={`Rank for ${p.name}`}
                           onChange={(e) => updatePlayer(p.id, { rank: Number(e.target.value) })}
                         >
+                          {p.rank === null && (
+                            <option value="" disabled>
+                              Set rank
+                            </option>
+                          )}
                           {RANK_OPTIONS.map((r) => (
                             <option key={r} value={r}>
                               {r}

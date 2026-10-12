@@ -24,7 +24,7 @@ export function PlayerForm({ open, player, onSave, onClose, findByName }: Player
   useEffect(() => {
     if (open) {
       setName(player?.name ?? '');
-      setRank(player ? String(player.rank) : '');
+      setRank(player?.rank != null ? String(player.rank) : '');
       setSubmitted(false);
     }
   }, [open, player]);

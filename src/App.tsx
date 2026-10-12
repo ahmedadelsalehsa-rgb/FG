@@ -4,7 +4,7 @@ import { SortTeams, type SortStep } from './components/SortTeams';
 import { minimumPlayers } from './components/TeamSelection';
 import { DEFAULT_TEAM_COUNT } from './config';
 import { usePlayers } from './hooks/usePlayers';
-import type { TeamResult } from './types';
+import { isRanked, type TeamResult } from './types';
 import { loadSession, saveSession } from './utils/storage';
 import { balanceTeams, DEFAULT_SEED } from './utils/teamBalancer';
 
@@ -50,7 +50,7 @@ export default function App() {
 
   const generate = (seed: number, avoidSignature?: string) => {
     // Always use the current player data, so rank changes are reflected immediately.
-    const chosen = players.filter((p) => selectedIds.has(p.id));
+    const chosen = players.filter(isRanked).filter((p) => selectedIds.has(p.id));
     if (chosen.length < minimumPlayers(teamCount)) {
       notify(`Select at least ${minimumPlayers(teamCount)} players for ${teamCount} teams.`, 'error');
       setStep('select');

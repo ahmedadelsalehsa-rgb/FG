@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { rankToScore } from '../config';
-import type { Player, TeamResult } from '../types';
+import type { RankedPlayer as Player, TeamResult } from '../types';
 import { createRng, shuffled } from './random';
 import { balanceTeams, summarizeFairness, teamSizes, teamStrength } from './teamBalancer';
 

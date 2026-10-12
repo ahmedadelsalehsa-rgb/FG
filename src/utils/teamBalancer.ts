@@ -29,7 +29,7 @@
  * score, so spreading strong players matters more than spreading weak ones.
  */
 import { BALANCER_SETTINGS, rankToScore, StrengthScale, STRENGTH_SCALE } from '../config';
-import type { Player, Team, TeamResult } from '../types';
+import type { RankedPlayer as Player, Team, TeamResult } from '../types';
 import { createRng, shuffled } from './random';
 
 export interface BalanceOptions {

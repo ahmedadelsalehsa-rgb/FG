@@ -93,6 +93,28 @@ describe('import / export', () => {
     expect(() => parseImportFile('x.json', '{"foo":1}')).toThrow(/No player list/);
   });
 
+  it('keeps players whose rank is left empty, as unranked', () => {
+    const csv = parseImportFile('x.csv', 'name,rank\nAbdelfattah,\nTarek,3\n');
+    expect(csv.players).toEqual([
+      { name: 'Abdelfattah', rank: null },
+      { name: 'Tarek', rank: 3 },
+    ]);
+    expect(csv.warnings).toEqual([]);
+    const json = parseImportFile('x.json', '[{"name":"Hassan","rank":null},{"name":"Yasser"}]');
+    expect(json.players).toEqual([
+      { name: 'Hassan', rank: null },
+      { name: 'Yasser', rank: null },
+    ]);
+    const store = memoryStore();
+    savePlayers([{ id: 'u', name: 'Hassan', rank: null }], store);
+    expect(loadPlayers(store)).toEqual([{ id: 'u', name: 'Hassan', rank: null }]);
+  });
+
+  it('an empty rank in an import never wipes an existing rank', () => {
+    const merged = mergePlayers(sample, [{ name: 'Ali', rank: null }]);
+    expect(merged.find((p) => p.id === 'a')!.rank).toBe(1);
+  });
+
   it('merges by name (case-insensitive), updating ranks and adding new players', () => {
     const merged = mergePlayers(sample, [
       { name: 'ali', rank: 3 },

@@ -1,12 +1,19 @@
 export interface Player {
   id: string;
   name: string;
-  rank: number;
+  /** null = not ranked yet (e.g. imported without a rank). Unranked players cannot join a game. */
+  rank: number | null;
+}
+
+export type RankedPlayer = Player & { rank: number };
+
+export function isRanked(p: Player): p is RankedPlayer {
+  return p.rank !== null;
 }
 
 export interface Team {
   name: string;
-  players: Player[];
+  players: RankedPlayer[];
   strength: number;
 }
 

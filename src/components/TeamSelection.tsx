@@ -1,6 +1,6 @@
 import { useId, useMemo, useState } from 'react';
 import { MIN_PLAYERS_PER_TEAM, TEAM_COUNT_OPTIONS } from '../config';
-import type { Player } from '../types';
+import { isRanked, type Player } from '../types';
 import { teamSizes } from '../utils/teamBalancer';
 import { RankBadge } from './RankBadge';
 
@@ -32,7 +32,7 @@ export function TeamSelection({
   const countHelpId = useId();
 
   const sorted = useMemo(
-    () => [...players].sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name)),
+    () => [...players].sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name)),
     [players],
   );
   const visible = useMemo(() => {
@@ -40,7 +40,9 @@ export function TeamSelection({
     return q ? sorted.filter((p) => p.name.toLocaleLowerCase().includes(q)) : sorted;
   }, [sorted, query]);
 
-  const selectedCount = players.filter((p) => selectedIds.has(p.id)).length;
+  const selectedCount = players.filter((p) => isRanked(p) && selectedIds.has(p.id)).length;
+  const rankedCount = players.filter(isRanked).length;
+  const unranked = players.length - rankedCount;
   const min = minimumPlayers(teamCount);
   const tooFew = selectedCount < min;
   const sizes = teamSizes(selectedCount, teamCount);
@@ -128,7 +130,7 @@ export function TeamSelection({
             <button
               type="button"
               className="btn btn-secondary btn-sm"
-              onClick={() => setMany(visible.map((p) => p.id), true)}
+              onClick={() => setMany(visible.filter(isRanked).map((p) => p.id), true)}
             >
               Select All{query ? ' shown' : ''}
             </button>
@@ -142,20 +144,38 @@ export function TeamSelection({
           </div>
         </div>
 
+        <span id={`${searchId}-unranked`} hidden>
+          No rank yet
+        </span>
         <p className="selected-count" aria-live="polite">
-          <strong>{selectedCount}</strong> of {players.length} players selected
+          <strong>{selectedCount}</strong> of {rankedCount} players selected
         </p>
+        {unranked > 0 && (
+          <p className="muted small">
+            {unranked} player{unranked === 1 ? '' : 's'} without a rank can’t be picked yet.{' '}
+            <button type="button" className="link" onClick={onManagePlayers}>
+              Set ranks on the Players page
+            </button>
+          </p>
+        )}
 
         {visible.length === 0 ? (
           <p className="empty-inline muted">No players match “{query}”.</p>
         ) : (
           <ul className="check-list">
             {visible.map((p) => {
-              const checked = selectedIds.has(p.id);
+              const ranked = isRanked(p);
+              const checked = ranked && selectedIds.has(p.id);
               return (
                 <li key={p.id}>
-                  <label className={`check-item${checked ? ' checked' : ''}`}>
-                    <input type="checkbox" checked={checked} onChange={() => toggle(p.id)} />
+                  <label className={`check-item${checked ? ' checked' : ''}${ranked ? '' : ' disabled'}`}>
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      disabled={!ranked}
+                      aria-describedby={ranked ? undefined : `${searchId}-unranked`}
+                      onChange={() => toggle(p.id)}
+                    />
                     <span className="check-name">{p.name}</span>
                     <RankBadge rank={p.rank} />
                   </label>
