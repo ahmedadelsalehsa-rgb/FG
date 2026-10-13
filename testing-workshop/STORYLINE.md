@@ -8,7 +8,7 @@ The whole track follows **one release of the internal project, from start to fin
 
 ```
  A. WHO WE ARE  →  B. THE RULES  →  C. PREPARING  →  D. DOING THE WORK  →  E. CONTROL  →  F. CLOSE & LEARN
- Org, IT &         Strategy,        Planning & Risk,  Grooming & Estim.,    Monitoring,     Closure &
+ Org & IT,         Strategy,        Planning & Risk,  Grooming & Estim.,    Monitoring,     Closure &
  Test Policy       Lifecycle,       Tool Setup,       Design & Exec,        Risk, KPIs &    Lessons Learned
                    Gates, Change    (Env & Data)      Defects, Regression   Breaches, RCA,
                    & Config Mgmt                      (Automation)          CAPA, Audits
@@ -23,25 +23,26 @@ The whole track follows **one release of the internal project, from start to fin
 
 | Area | # | Chapter | TMMi | Story moment |
 |---|---|---|---|---|
-| **A. Who We Are** | A1 | [Organization Structure, IT Relationships & Test Policy](senior/A1-organisation-it-test-policy.md) | 3.1, 2.1 | Who does what, who decides, which rules we committed to |
-| **B. The Rules** | B2 | [Test Strategy](senior/B2-test-strategy.md) | 2.1, 3.4 | How we test; which quality attributes matter |
-| | B3 | [Lifecycle & Integration](senior/B3-test-lifecycle-integration.md) | 3.3 | Where testing sits on the timeline |
-| | B4 | [Quality Gates](senior/B4-quality-gates.md) | 2.3, 3.3 | Gates G0–G6 built from the strategy |
-| | B5 | [Change & Configuration Management (CCB & CAB)](senior/B5-change-config-management-cab.md) | 2.4, GP2.6 | Baselines, scope change (CCB), production change (CAB) |
-| **C. Preparing** | C6 | [Test Planning & Risk Assessment](senior/C6-test-planning-risk-assessment.md) | 2.2, 3.3 | MTP; risks identified and scored |
-| | C7 | [Tool Setup](senior/C7-test-management-tool-setup.md) | 3.3 | Jira / Azure DevOps configured |
-| | C8 | [Test Environment & Test Data](senior/C8-test-environment-data.md) *(optional)* | 2.5 | Environment & data ready (feeds G3) |
-| **D. Doing the Work** | D9 | [Grooming & Estimation](senior/D9-grooming-estimation.md) | 2.2, 3.3, 3.5 | Refinement, requirements review, DoR, estimates |
-| | D10 | [Test Design & Execution](senior/D10-test-design-execution.md) | 2.4 | Risk-prioritised tests, intake, execution |
-| | D11 | [Defect Management](senior/D11-defect-management.md) | 2.4 SG4 | Report, triage, fix, tag root cause |
-| | D12 | [Regression Testing (Automation)](senior/D12-regression-testing-automation.md) | 2.4, 3.3 | Risk-based regression, automated pipeline gate |
-| **E. Control** | E13 | [Monitoring & Control](senior/E13-monitoring-control.md) | 2.3 | Progress & quality vs plan |
-| | E14 | [Risk Management](senior/E14-risk-management.md) | 2.3 | Risks re-scored; risk → issue |
-| | E15 | [KPIs & Breaches](senior/E15-kpis-breaches.md) | 2.3 | Thresholds, SLA breach, escalation |
-| | E16 | [Root Cause Analysis](senior/E16-root-cause-analysis.md) | 2.3 SG3 | Why did it happen? |
-| | E17 | [CAPA](senior/E17-capa.md) | 2.3 SG3, 3.1 | Fix cause, prevent, verify effectiveness |
-| | E18 | [Audits](senior/E18-audits.md) | GP2.9 | Was the process really followed? |
-| **F. Close & Learn** | F19 | [Test Closure & Lessons Learned](senior/F19-test-closure-lessons-learned.md) | 2.3, 3.1 SP5.3 | Completion report, Go/No-Go, hypercare, lessons → process assets |
+| **A. Who We Are** | A1 | [Organization Structure & IT Relationships](senior/A1-organisation-it-relationships.md) | 3.1 | Who does what, who we depend on, who decides |
+| | A2 | [Test Policy](senior/A2-test-policy.md) | 2.1 | Which rules the organisation committed to, and why |
+| **B. The Rules** | B3 | [Test Strategy](senior/B3-test-strategy.md) | 2.1, 3.4 | How we test; which quality attributes matter |
+| | B4 | [Lifecycle & Integration](senior/B4-test-lifecycle-integration.md) | 3.3 | Where testing sits on the timeline |
+| | B5 | [Quality Gates](senior/B5-quality-gates.md) | 2.3, 3.3 | Gates G0–G6 built from the strategy |
+| | B6 | [Change & Configuration Management (CCB & CAB)](senior/B6-change-config-management-cab.md) | 2.4, GP2.6 | Baselines, scope change (CCB), production change (CAB) |
+| **C. Preparing** | C7 | [Test Planning & Risk Assessment](senior/C7-test-planning-risk-assessment.md) | 2.2, 3.3 | MTP; risks identified and scored |
+| | C8 | [Tool Setup](senior/C8-test-management-tool-setup.md) | 3.3 | Jira / Azure DevOps configured |
+| | C9 | [Test Environment & Test Data](senior/C9-test-environment-data.md) *(optional)* | 2.5 | Environment & data ready (feeds G3) |
+| **D. Doing the Work** | D10 | [Grooming & Estimation](senior/D10-grooming-estimation.md) | 2.2, 3.3, 3.5 | Refinement, requirements review, DoR, estimates |
+| | D11 | [Test Design & Execution](senior/D11-test-design-execution.md) | 2.4 | Risk-prioritised tests, intake, execution |
+| | D12 | [Defect Management](senior/D12-defect-management.md) | 2.4 SG4 | Report, triage, fix, tag root cause |
+| | D13 | [Regression Testing (Automation)](senior/D13-regression-testing-automation.md) | 2.4, 3.3 | Risk-based regression, automated pipeline gate |
+| **E. Control** | E14 | [Monitoring & Control](senior/E14-monitoring-control.md) | 2.3 | Progress & quality vs plan |
+| | E15 | [Risk Management](senior/E15-risk-management.md) | 2.3 | Risks re-scored; risk → issue |
+| | E16 | [KPIs & Breaches](senior/E16-kpis-breaches.md) | 2.3 | Thresholds, SLA breach, escalation |
+| | E17 | [Root Cause Analysis](senior/E17-root-cause-analysis.md) | 2.3 SG3 | Why did it happen? |
+| | E18 | [CAPA](senior/E18-capa.md) | 2.3 SG3, 3.1 | Fix cause, prevent, verify effectiveness |
+| | E19 | [Audits](senior/E19-audits.md) | GP2.9 | Was the process really followed? |
+| **F. Close & Learn** | F20 | [Test Closure & Lessons Learned](senior/F20-test-closure-lessons-learned.md) | 2.3, 3.1 SP5.3 | Completion report, Go/No-Go, hypercare, lessons → process assets |
 
 ## 3. Managerial Level
 
@@ -63,13 +64,13 @@ The whole track follows **one release of the internal project, from start to fin
 
 | Decision | Applied as |
 |---|---|
-| Organization and Test Policy merged | A1 |
-| Change & Configuration Management under The Rules | B5 (CCB vs CAB explained there; bodies introduced in A1) |
-| Test Environment & Data optional | C8, marked Optional in the tailoring matrix |
-| Reviews folded into the work | Requirements reviews in D9, test case reviews in D10, advanced reviews in M9 |
-| Automation focused on regression | D12 Regression Testing (Automation) |
-| RCA, CAPA and Audits moved to Control | E16, E17, E18 |
-| Closure merged with Lessons Learned | F19 (includes Go/No-Go, CAB submission, hypercare) |
+| Organization and Test Policy grouped in Area A as two chapters | A1, A2 |
+| Change & Configuration Management under The Rules | B6 (CCB vs CAB explained there; bodies introduced in A1) |
+| Test Environment & Data optional | C9, marked Optional in the tailoring matrix |
+| Reviews folded into the work | Requirements reviews in D10, test case reviews in D11, advanced reviews in M9 |
+| Automation focused on regression | D13 Regression Testing (Automation) |
+| RCA, CAPA and Audits moved to Control | E17, E18, E19 |
+| Closure merged with Lessons Learned | F20 (includes Go/No-Go, CAB submission, hypercare) |
 | Topics tailored per batch | [TAILORING.md](TAILORING.md): role profiles, depth levels, coverage matrix, batch profile |
 | Running case | Internal project, release R1.0 |
 | Format | Markdown in this repo (can be exported to a doc, Word or slides later) |
@@ -96,7 +97,7 @@ Every chapter file uses the same header (level, **tailoring**, TMMi, references,
 testing-workshop/
 ├── STORYLINE.md      ← this file: master outline
 ├── TAILORING.md      ← per-batch tailoring model
-├── senior/           ← A1–F19
+├── senior/           ← A1–F20
 ├── managerial/       ← M1–M11
 ├── sources/          ← your guides, one folder per chapter id
 ├── templates/        ← reusable templates

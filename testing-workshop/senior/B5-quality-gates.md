@@ -1,4 +1,4 @@
-# B4 · Quality Gates
+# B5 · Quality Gates
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 SP1.7, SP2.1, SP2.4, SP2.7; 3.3 SP2.1 |
 | **Other references** | CTFL v4.0 §5.1.3 (entry & exit criteria), Agile DoR/DoD |
-| **Source guide** | `sources/B4/` |
-| **Related chapters** | [B2 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B2-test-strategy.md) · [E18 Audits](E18-audits.md) · [M3 Quality Gate Reporting & Trends](../managerial/M3-gate-reporting-trends.md) |
+| **Source guide** | `sources/B5/` |
+| **Related chapters** | [B3 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B3-test-strategy.md) · [E19 Audits](E19-audits.md) · [M3 Quality Gate Reporting & Trends](../managerial/M3-gate-reporting-trends.md) |
 
 ## 1. Story hook
 Every milestone of R1.0 now gets a gate. The gate criteria come straight from the strategy's quality attributes and risks.
@@ -44,12 +44,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-E15 (gate first-pass KPI); F19 (G5/G6); M3
+E16 (gate first-pass KPI); F20 (G5/G6); M3
 
 ## 9. References
 - TMMi: 2.3 SP1.7, SP2.1, SP2.4, SP2.7; 3.3 SP2.1
 - CTFL v4.0 §5.1.3 (entry & exit criteria), Agile DoR/DoD
-- Source guide: `sources/B4/` *(pending)*
+- Source guide: `sources/B5/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

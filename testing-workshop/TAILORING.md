@@ -28,27 +28,28 @@ Use this as the **starting point**. Adjust it in the batch profile (section 5).
 
 | Area | Chapter | TA | TTA | TL | TM | QG | XF |
 |---|---|---|---|---|---|---|---|
-| **A. Who We Are** | A1 Organization Structure, IT Relationships & Test Policy | K | K | P | E | E | K |
-| **B. The Rules** | B2 Test Strategy | K | P | P | E | P | K |
-| | B3 Lifecycle & Integration | P | P | P | E | E | P |
-| | B4 Quality Gates | P | P | E | E | E | P |
-| | B5 Change & Configuration Management | P | P | E | E | E | P |
-| **C. Preparing** | C6 Test Planning & Risk Assessment | P | K | E | E | P | K |
-| | C7 Tool Setup | P | E | P | K | P | K |
-| | C8 Test Environment & Test Data *(optional)* | – | P | P | K | – | – |
-| **D. Doing the Work** | D9 Grooming & Estimation | E | P | E | P | K | P |
-| | D10 Test Design & Execution | E | P | P | K | K | K |
-| | D11 Defect Management | E | P | E | P | P | P |
-| | D12 Regression Testing (Automation) | P | E | P | K | K | K |
-| **E. Control** | E13 Monitoring & Control | P | K | E | E | E | K |
-| | E14 Risk Management | P | K | E | E | E | K |
-| | E15 KPIs & Breaches | P | P | E | E | E | K |
-| | E16 Root Cause Analysis | P | P | E | E | E | P |
-| | E17 CAPA | K | K | P | E | E | K |
-| | E18 Audits | K | K | P | P | E | – |
-| **F. Close & Learn** | F19 Test Closure & Lessons Learned | P | P | E | E | P | K |
+| **A. Who We Are** | A1 Organization Structure & IT Relationships | K | K | P | E | E | K |
+| | A2 Test Policy | K | K | P | E | E | K |
+| **B. The Rules** | B3 Test Strategy | K | P | P | E | P | K |
+| | B4 Lifecycle & Integration | P | P | P | E | E | P |
+| | B5 Quality Gates | P | P | E | E | E | P |
+| | B6 Change & Configuration Management | P | P | E | E | E | P |
+| **C. Preparing** | C7 Test Planning & Risk Assessment | P | K | E | E | P | K |
+| | C8 Tool Setup | P | E | P | K | P | K |
+| | C9 Test Environment & Test Data *(optional)* | – | P | P | K | – | – |
+| **D. Doing the Work** | D10 Grooming & Estimation | E | P | E | P | K | P |
+| | D11 Test Design & Execution | E | P | P | K | K | K |
+| | D12 Defect Management | E | P | E | P | P | P |
+| | D13 Regression Testing (Automation) | P | E | P | K | K | K |
+| **E. Control** | E14 Monitoring & Control | P | K | E | E | E | K |
+| | E15 Risk Management | P | K | E | E | E | K |
+| | E16 KPIs & Breaches | P | P | E | E | E | K |
+| | E17 Root Cause Analysis | P | P | E | E | E | P |
+| | E18 CAPA | K | K | P | E | E | K |
+| | E19 Audits | K | K | P | P | E | – |
+| **F. Close & Learn** | F20 Test Closure & Lessons Learned | P | P | E | E | P | K |
 
-**Always included, whatever the batch:** B4 Quality Gates, D11 Defect Management, E15 KPIs & Breaches, F19 Closure & Lessons Learned (at least at K level). They hold the story together.
+**Always included, whatever the batch:** B5 Quality Gates, D12 Defect Management, E16 KPIs & Breaches, F20 Closure & Lessons Learned (at least at K level). They hold the story together.
 
 ## 4. Tailoring rules
 
@@ -58,14 +59,14 @@ Use this as the **starting point**. Adjust it in the batch profile (section 5).
    - With 5 or more years in the role, move K→P or P→E on chapters the participants already practise.
    - Fresh joiners move down one level on E chapters.
 4. **Work requirements override defaults.** Examples:
-   - A team on regulated or audited projects sets E18 Audits and B5 Change Mgmt to E.
-   - A team without automation sets D12 to K.
-   - A team that owns its environments includes C8.
+   - A team on regulated or audited projects sets E19 Audits and B6 Change Mgmt to E.
+   - A team without automation sets D13 to K.
+   - A team that owns its environments includes C9.
 5. **Mixed batches:** use the **highest** depth needed by more than 30% of participants. Give the others pre-reading or follow-up material.
 6. **Capstone roles follow profiles.**
    - TL and TM rotate as Test Manager and Gatekeeper.
    - TTA owns regression and the pipeline.
-   - QG runs the audit (E18).
+   - QG runs the audit (E19).
    - XF play PO, BA or Dev in the injects.
 7. **Record the tailoring.** Each batch's profile is kept as evidence for TMMi 3.2 (Test Training Program) and GP2.5.
 

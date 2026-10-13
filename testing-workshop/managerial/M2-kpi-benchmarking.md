@@ -8,7 +8,7 @@
 | **TMMi** | 4.1 Test Measurement |
 | **Other references** | ISO/IEC/IEEE 15939 (measurement process); GQM (Goal-Question-Metric) |
 | **Source guide** | `sources/M2/` |
-| **Related chapters** | [E15 KPIs & Breaches](../senior/E15-kpis-breaches.md) · [M3 Quality Gate Reporting & Trends](M3-gate-reporting-trends.md) · [M4 Executive Reporting & Stakeholder Management](M4-executive-reporting.md) |
+| **Related chapters** | [E16 KPIs & Breaches](../senior/E16-kpis-breaches.md) · [M3 Quality Gate Reporting & Trends](M3-gate-reporting-trends.md) · [M4 Executive Reporting & Stakeholder Management](M4-executive-reporting.md) |
 
 ## 1. Story hook
 Project A reports 95% pass rate and Project B reports 80%. Is B worse? Not until the numbers are made comparable.

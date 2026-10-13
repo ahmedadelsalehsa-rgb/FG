@@ -1,4 +1,4 @@
-# C6 · Test Planning & Product/Project Risk Assessment
+# C7 · Test Planning & Product/Project Risk Assessment
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.2 Test Planning; 3.3 SG3 (Master Test Plan); 2.3 SP1.4 (risk input) |
 | **Other references** | CTFL v4.0 §5.1 (planning), §5.2.1–5.2.3 (risk identification & analysis) |
-| **Source guide** | `sources/C6/` |
-| **Related chapters** | [B2 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B2-test-strategy.md) · [D9 Grooming (Refinement) & Estimation](D9-grooming-estimation.md) · [E14 Risk Management (Monitoring & Control)](E14-risk-management.md) |
+| **Source guide** | `sources/C7/` |
+| **Related chapters** | [B3 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B3-test-strategy.md) · [D10 Grooming (Refinement) & Estimation](D10-grooming-estimation.md) · [E15 Risk Management (Monitoring & Control)](E15-risk-management.md) |
 
 ## 1. Story hook
 With the strategy and gates agreed, the Test Manager writes the plan for R1.0. The plan starts by finding out what could go wrong.
@@ -44,12 +44,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 G2; E14 (monitoring)
+B5 G2; E15 (monitoring)
 
 ## 9. References
 - TMMi: 2.2 Test Planning; 3.3 SG3 (Master Test Plan); 2.3 SP1.4 (risk input)
 - CTFL v4.0 §5.1 (planning), §5.2.1–5.2.3 (risk identification & analysis)
-- Source guide: `sources/C6/` *(pending)*
+- Source guide: `sources/C7/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

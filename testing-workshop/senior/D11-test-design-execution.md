@@ -1,4 +1,4 @@
-# D10 · Test Design & Execution
+# D11 · Test Design & Execution
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.4 Test Design and Execution (SG1–SG3) |
 | **Other references** | CTFL v4.0 §4 (test techniques), §5.1.5 (prioritisation) |
-| **Source guide** | `sources/D10/` |
-| **Related chapters** | [D9 Grooming (Refinement) & Estimation](D9-grooming-estimation.md) · [D11 Defect Management](D11-defect-management.md) · [D12 Regression Testing (Automation)](D12-regression-testing-automation.md) |
+| **Source guide** | `sources/D11/` |
+| **Related chapters** | [D10 Grooming (Refinement) & Estimation](D10-grooming-estimation.md) · [D12 Defect Management](D12-defect-management.md) · [D13 Regression Testing (Automation)](D13-regression-testing-automation.md) |
 
 ## 1. Story hook
 Stories are ready. The team designs risk-prioritised tests, runs the intake test on each build, executes and keeps a log.
@@ -46,12 +46,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 G3/G4; E15 K1–K4
+B5 G3/G4; E16 K1–K4
 
 ## 9. References
 - TMMi: 2.4 Test Design and Execution (SG1–SG3)
 - CTFL v4.0 §4 (test techniques), §5.1.5 (prioritisation)
-- Source guide: `sources/D10/` *(pending)*
+- Source guide: `sources/D11/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

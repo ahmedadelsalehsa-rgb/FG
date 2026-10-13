@@ -8,7 +8,7 @@
 | **TMMi** | 3.1 SG4 (determine, plan and implement improvements); TMMi Assessment Method (TAMAR) |
 | **Other references** | TMMi Framework; CTAL-TM (test process improvement) |
 | **Source guide** | `sources/M1/` |
-| **Related chapters** | [E17 CAPA (Corrective & Preventive Actions)](../senior/E17-capa.md) · [E18 Audits](../senior/E18-audits.md) · [M2 KPI Benchmarking & Cross-Project Use](M2-kpi-benchmarking.md) |
+| **Related chapters** | [E18 CAPA (Corrective & Preventive Actions)](../senior/E18-capa.md) · [E19 Audits](../senior/E19-audits.md) · [M2 KPI Benchmarking & Cross-Project Use](M2-kpi-benchmarking.md) |
 
 ## 1. Story hook
 Five releases later the manager asks where we are on the TMMi ladder and what we should improve next.

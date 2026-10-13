@@ -1,4 +1,4 @@
-# C7 · Test Management Tool Setup (Jira / Azure DevOps)
+# C8 · Test Management Tool Setup (Jira / Azure DevOps)
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 3.3 SP1.6 (work environment standards); supports 2.3 & 2.4 |
 | **Other references** | CTFL v4.0 §6 (tool support) |
-| **Source guide** | `sources/C7/` |
-| **Related chapters** | [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) · [D11 Defect Management](D11-defect-management.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) |
+| **Source guide** | `sources/C8/` |
+| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [D12 Defect Management](D12-defect-management.md) · [E16 KPIs & Breaches](E16-kpis-breaches.md) |
 
 ## 1. Story hook
 The plan is approved. Now the plan, risks, gates, CRs, defects and KPIs need a place to live where everyone can see them.
@@ -44,12 +44,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-E15 KPI data sources
+E16 KPI data sources
 
 ## 9. References
 - TMMi: 3.3 SP1.6 (work environment standards); supports 2.3 & 2.4
 - CTFL v4.0 §6 (tool support)
-- Source guide: `sources/C7/` *(pending)*
+- Source guide: `sources/C8/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

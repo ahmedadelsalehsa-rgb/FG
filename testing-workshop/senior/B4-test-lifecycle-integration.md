@@ -1,4 +1,4 @@
-# B3 · Test Lifecycle & Integration with SDLC / Agile
+# B4 · Test Lifecycle & Integration with SDLC / Agile
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 3.3 Test Lifecycle and Integration (SG1, SG2) |
 | **Other references** | CTFL v4.0 §2.1 (SDLC & testing), §2.1.5 (shift-left) |
-| **Source guide** | `sources/B3/` |
-| **Related chapters** | [B2 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B2-test-strategy.md) · [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) |
+| **Source guide** | `sources/B4/` |
+| **Related chapters** | [B3 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B3-test-strategy.md) · [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) |
 
 ## 1. Story hook
 The release follows a Scrum delivery with release-level milestones. This chapter shows where each test activity sits on that timeline.
@@ -44,12 +44,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 gate positions
+B5 gate positions
 
 ## 9. References
 - TMMi: 3.3 Test Lifecycle and Integration (SG1, SG2)
 - CTFL v4.0 §2.1 (SDLC & testing), §2.1.5 (shift-left)
-- Source guide: `sources/B3/` *(pending)*
+- Source guide: `sources/B4/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

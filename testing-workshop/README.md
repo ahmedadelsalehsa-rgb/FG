@@ -24,23 +24,23 @@ Graduates leave able to pass the CTFL exam. They can also **operate a TMMi Level
 
 | Layer | What it is | Where |
 |---|---|---|
-| **Body of knowledge** | The story: one chapter per topic, Senior (A1–F19) and Managerial (M1–M11) | [STORYLINE.md](STORYLINE.md) → `senior/`, `managerial/` |
+| **Body of knowledge** | The story: one chapter per topic, Senior (A1–F20) and Managerial (M1–M11) | [STORYLINE.md](STORYLINE.md) → `senior/`, `managerial/` |
 | **Workshop delivery plan** | How the chapters are taught: schedule, labs, capstone, assessment | files `01`–`05` below |
 
 ### Workshop module → chapters
 
 | Workshop module ([01](01-curriculum.md)) | Chapters |
 |---|---|
-| M1 Fundamentals | A1 |
-| M2 Testing in the SDLC | B2, B3, B4 |
-| M3 Agile | B5, D9 |
-| M4 Static testing | D9 (requirements reviews), D10 (test case reviews) |
-| M5 Test analysis & design | D10 |
-| M6 Planning & risk | C6, C8 (optional) |
-| M7 Monitoring & control | E13–E18 |
-| M8 Tools | C7, D12 |
-| M9 Execution & incidents | D10, D11 |
-| M10 Capstone | F19 (+ all above in practice) |
+| M1 Fundamentals | A1, A2 |
+| M2 Testing in the SDLC | B3, B4, B5 |
+| M3 Agile | B6, D10 |
+| M4 Static testing | D10 (requirements reviews), D11 (test case reviews) |
+| M5 Test analysis & design | D11 |
+| M6 Planning & risk | C7, C9 (optional) |
+| M7 Monitoring & control | E14–E19 |
+| M8 Tools | C8, D13 |
+| M9 Execution & incidents | D11, D12 |
+| M10 Capstone | F20 (+ all above in practice) |
 | Managerial track | M1–M11 (separate programme) |
 
 Chapters and depth are **tailored per batch**. See [TAILORING.md](TAILORING.md).

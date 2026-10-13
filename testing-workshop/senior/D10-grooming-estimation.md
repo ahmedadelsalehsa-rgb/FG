@@ -1,4 +1,4 @@
-# D9 · Grooming (Refinement) & Estimation
+# D10 · Grooming (Refinement) & Estimation
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.2 SG2 (establish test estimates); 3.3 SP3.3; 3.5 Peer Reviews (requirements reviews) |
 | **Other references** | CTFL v4.0 §5.1.4 (estimation), §5.1.2 (tester's contribution to iteration & release planning), §4.5 (collaboration-based approaches); CTFL v4.0 §3 (static testing / reviews) |
-| **Source guide** | `sources/D9/` |
-| **Related chapters** | [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) · [D10 Test Design & Execution](D10-test-design-execution.md) · [E14 Risk Management (Monitoring & Control)](E14-risk-management.md) |
+| **Source guide** | `sources/D10/` |
+| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [D11 Test Design & Execution](D11-test-design-execution.md) · [E15 Risk Management (Monitoring & Control)](E15-risk-management.md) |
 
 ## 1. Story hook
 Sprint 1 starts. In refinement the tester asks questions, checks testability and acceptance criteria, and estimates the testing effort.
@@ -46,12 +46,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-E15 K12 effort variance
+E16 K12 effort variance
 
 ## 9. References
 - TMMi: 2.2 SG2 (establish test estimates); 3.3 SP3.3; 3.5 Peer Reviews (requirements reviews)
 - CTFL v4.0 §5.1.4 (estimation), §5.1.2 (tester's contribution to iteration & release planning), §4.5 (collaboration-based approaches); CTFL v4.0 §3 (static testing / reviews)
-- Source guide: `sources/D9/` *(pending)*
+- Source guide: `sources/D10/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

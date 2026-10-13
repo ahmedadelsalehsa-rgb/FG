@@ -1,4 +1,4 @@
-# F19 · Test Closure & Lessons Learned
+# F20 · Test Closure & Lessons Learned
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 SP2.7 (product quality milestone reviews); 3.1 SP5.3 (incorporate lessons learned); 3.3 SP1.5 (asset library) |
 | **Other references** | CTFL v4.0 §5.3 (test completion), §1.3 (test completion activities) |
-| **Source guide** | `sources/F19/` |
-| **Related chapters** | [B3 Test Lifecycle & Integration with SDLC / Agile](B3-test-lifecycle-integration.md) · [B4 Quality Gates](B4-quality-gates.md) · [E17 CAPA (Corrective & Preventive Actions)](E17-capa.md) · [M1 Test Process Assessment & Improvement Roadmap](../managerial/M1-assessment-improvement-roadmap.md) |
+| **Source guide** | `sources/F20/` |
+| **Related chapters** | [B4 Test Lifecycle & Integration with SDLC / Agile](B4-test-lifecycle-integration.md) · [B5 Quality Gates](B5-quality-gates.md) · [E18 CAPA (Corrective & Preventive Actions)](E18-capa.md) · [M1 Test Process Assessment & Improvement Roadmap](../managerial/M1-assessment-improvement-roadmap.md) |
 
 ## 1. Story hook
 Execution is done. The team writes the completion report, supports the Go/No-Go (G5) and hypercare (G6), then turns everything the release taught into lessons learned and updated process assets.
@@ -26,7 +26,7 @@ Planned scope:
 - Test completion activities
 - Completion report contents (scope, results, deviations, residual risks, KPIs, recommendation)
 - Go/No-Go meeting and G5 decision
-- CAB submission (link to B5)
+- CAB submission (link to B6)
 - Hypercare and G6
 - Testware archiving and handover
 - Lessons learned session (what worked, what didn't, root causes, CAPAs raised)
@@ -50,12 +50,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 G5/G6; M1 improvement roadmap
+B5 G5/G6; M1 improvement roadmap
 
 ## 9. References
 - TMMi: 2.3 SP2.7 (product quality milestone reviews); 3.1 SP5.3 (incorporate lessons learned); 3.3 SP1.5 (asset library)
 - CTFL v4.0 §5.3 (test completion), §1.3 (test completion activities)
-- Source guide: `sources/F19/` *(pending)*
+- Source guide: `sources/F20/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

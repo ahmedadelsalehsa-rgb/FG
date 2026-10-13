@@ -8,7 +8,7 @@
 | **TMMi** | 4.2 Product Quality Evaluation; 5.2 Quality Control |
 | **Other references** | Statistical process control (control charts) |
 | **Source guide** | `sources/M3/` |
-| **Related chapters** | [B4 Quality Gates](../senior/B4-quality-gates.md) · [M2 KPI Benchmarking & Cross-Project Use](M2-kpi-benchmarking.md) · [M4 Executive Reporting & Stakeholder Management](M4-executive-reporting.md) |
+| **Related chapters** | [B5 Quality Gates](../senior/B5-quality-gates.md) · [M2 KPI Benchmarking & Cross-Project Use](M2-kpi-benchmarking.md) · [M4 Executive Reporting & Stakeholder Management](M4-executive-reporting.md) |
 
 ## 1. Story hook
 Across the portfolio, G4 fails first time in 40% of releases. Is that normal variation, or a signal?

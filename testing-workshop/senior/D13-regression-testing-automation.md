@@ -1,4 +1,4 @@
-# D12 · Regression Testing (Automation)
+# D13 · Regression Testing (Automation)
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.4 (test implementation & execution); 3.3 (integrated lifecycle) |
 | **Other references** | CTFL v4.0 §2.2.3 (confirmation & regression testing), §5.1.6 (test pyramid), §2.1.4 (DevOps), §6.2 (automation benefits & risks) |
-| **Source guide** | `sources/D12/` |
-| **Related chapters** | [B2 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B2-test-strategy.md) · [B3 Test Lifecycle & Integration with SDLC / Agile](B3-test-lifecycle-integration.md) · [B4 Quality Gates](B4-quality-gates.md) · [D10 Test Design & Execution](D10-test-design-execution.md) · [M11 Innovation & Pilots](../managerial/M11-innovation-pilots.md) |
+| **Source guide** | `sources/D13/` |
+| **Related chapters** | [B3 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B3-test-strategy.md) · [B4 Test Lifecycle & Integration with SDLC / Agile](B4-test-lifecycle-integration.md) · [B5 Quality Gates](B5-quality-gates.md) · [D11 Test Design & Execution](D11-test-design-execution.md) · [M11 Innovation & Pilots](../managerial/M11-innovation-pilots.md) |
 
 ## 1. Story hook
 Every new build risks breaking what already worked. The team builds a risk-based regression suite, decides what to automate, and runs it as a gate in the pipeline.
@@ -24,7 +24,7 @@ After this chapter, the participant can:
 Planned scope:
 - Confirmation (re-test) vs regression testing
 - Regression suite design: core / risk-based / change-based selection
-- Regression scope from change impact analysis (link to B5)
+- Regression scope from change impact analysis (link to B6)
 - Test pyramid and automation candidates
 - Automation framework and standards (overview)
 - Automated regression in the CI/CD pipeline as G3/G4 checks
@@ -48,12 +48,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 G3/G4 automated checks
+B5 G3/G4 automated checks
 
 ## 9. References
 - TMMi: 2.4 (test implementation & execution); 3.3 (integrated lifecycle)
 - CTFL v4.0 §2.2.3 (confirmation & regression testing), §5.1.6 (test pyramid), §2.1.4 (DevOps), §6.2 (automation benefits & risks)
-- Source guide: `sources/D12/` *(pending)*
+- Source guide: `sources/D13/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

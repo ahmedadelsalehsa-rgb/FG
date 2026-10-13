@@ -1,4 +1,4 @@
-# C8 · Test Environment & Test Data (Optional)
+# C9 · Test Environment & Test Data (Optional)
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.5 Test Environment |
 | **Other references** | CTFL v4.0 §1.4 (test environment), §5.1 (planning) |
-| **Source guide** | `sources/C8/` |
-| **Related chapters** | [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) · [D10 Test Design & Execution](D10-test-design-execution.md) |
+| **Source guide** | `sources/C9/` |
+| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [D11 Test Design & Execution](D11-test-design-execution.md) |
 
 ## 1. Story hook
 The first build is ready, but the QA environment isn't. This side chapter covers how environments and data are requested, built, checked and kept stable.
@@ -44,12 +44,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 G3; E15 K13
+B5 G3; E16 K13
 
 ## 9. References
 - TMMi: 2.5 Test Environment
 - CTFL v4.0 §1.4 (test environment), §5.1 (planning)
-- Source guide: `sources/C8/` *(pending)*
+- Source guide: `sources/C9/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

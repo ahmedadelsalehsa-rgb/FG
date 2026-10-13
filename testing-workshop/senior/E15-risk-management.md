@@ -1,4 +1,4 @@
-# E14 · Risk Management (Monitoring & Control)
+# E15 · Risk Management (Monitoring & Control)
 
 | | |
 |---|---|
@@ -7,8 +7,8 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 SP1.4, SP2.3 |
 | **Other references** | CTFL v4.0 §5.2.4 (product risk control) |
-| **Source guide** | `sources/E14/` |
-| **Related chapters** | [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) · [E13 Test Monitoring & Control](E13-monitoring-control.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) |
+| **Source guide** | `sources/E15/` |
+| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [E14 Test Monitoring & Control](E14-monitoring-control.md) · [E16 KPIs & Breaches](E16-kpis-breaches.md) |
 
 ## 1. Story hook
 A risk identified in planning comes true: the environment goes down for three hours. Risks have to be watched, re-scored and turned into issues.
@@ -42,12 +42,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B4 G4/G5; E15 K4
+B5 G4/G5; E16 K4
 
 ## 9. References
 - TMMi: 2.3 SP1.4, SP2.3
 - CTFL v4.0 §5.2.4 (product risk control)
-- Source guide: `sources/E14/` *(pending)*
+- Source guide: `sources/E15/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.
