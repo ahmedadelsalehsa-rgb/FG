@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 (monitor commitments); 3.1 |
 | **Other references** | CTAL-TM (distributed, outsourced and insourced testing) |
 | **Source guide** | `sources/M8/` |
-| **Related chapters** | [E15 KPIs & Breaches](../senior/E15-kpis-breaches.md) · [F19 Audits](../senior/F19-audits.md) · [M6 Capacity & Resource Planning](M6-capacity-resource-planning.md) |
+| **Related chapters** | [E15 KPIs & Breaches](../senior/E15-kpis-breaches.md) · [E18 Audits](../senior/E18-audits.md) · [M6 Capacity & Resource Planning](M6-capacity-resource-planning.md) |
 
 ## 1. Story hook
 Part of the next release's testing goes to a vendor. How do we keep the same quality bar?

@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.4 SG4 (manage test incidents to closure) |
 | **Other references** | CTFL v4.0 §5.5 (defect management) |
 | **Source guide** | `sources/D11/` |
-| **Related chapters** | [B6 Change Management, Configuration Management & CAB](B6-change-config-management-cab.md) · [D10 Test Design & Execution](D10-test-design-execution.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) · [F17 Root Cause Analysis (RCA)](F17-root-cause-analysis.md) |
+| **Related chapters** | [B4 Quality Gates](B4-quality-gates.md) · [D10 Test Design & Execution](D10-test-design-execution.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) · [E16 Root Cause Analysis (RCA)](E16-root-cause-analysis.md) |
 
 ## 1. Story hook
 Execution finds a Critical defect in payments. How is it reported, triaged, fixed, retested, and tagged so we can learn from it?
@@ -44,7 +45,7 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-E15 K5–K10; F17 RCA
+E15 K5–K10; E16 RCA
 
 ## 9. References
 - TMMi: 2.4 SG4 (manage test incidents to closure)

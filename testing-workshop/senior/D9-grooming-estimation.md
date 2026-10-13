@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
-| **TMMi** | 2.2 SG2 (establish test estimates); 3.3 SP3.3 |
-| **Other references** | CTFL v4.0 §5.1.4 (estimation), §5.1.2 (tester's contribution to iteration & release planning), §4.5 (collaboration-based approaches) |
+| **TMMi** | 2.2 SG2 (establish test estimates); 3.3 SP3.3; 3.5 Peer Reviews (requirements reviews) |
+| **Other references** | CTFL v4.0 §5.1.4 (estimation), §5.1.2 (tester's contribution to iteration & release planning), §4.5 (collaboration-based approaches); CTFL v4.0 §3 (static testing / reviews) |
 | **Source guide** | `sources/D9/` |
-| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [D10 Test Design & Execution](D10-test-design-execution.md) · [S2 Side Topic · Reviews](side/S2-reviews.md) |
+| **Related chapters** | [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) · [D10 Test Design & Execution](D10-test-design-execution.md) · [E14 Risk Management (Monitoring & Control)](E14-risk-management.md) |
 
 ## 1. Story hook
 Sprint 1 starts. In refinement the tester asks questions, checks testability and acceptance criteria, and estimates the testing effort.
@@ -26,6 +27,7 @@ Planned scope:
 - Estimation techniques: planning poker, WBS, ratios, test point analysis, three-point (PERT)
 - Using the test process database (historical data)
 - Re-estimation after CRs
+- Requirements reviews during refinement (static testing, review types, review record as G1 evidence)
 
 > TODO: write from source guide.
 
@@ -38,6 +40,7 @@ Planned scope:
 ## 6. Artifacts & templates
 - DoR checklist *(to create)*
 - Estimation worksheet *(to create)*
+- Review record / log *(to create)*
 
 ## 7. Tool implementation
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
@@ -46,8 +49,8 @@ Planned scope:
 E15 K12 effort variance
 
 ## 9. References
-- TMMi: 2.2 SG2 (establish test estimates); 3.3 SP3.3
-- CTFL v4.0 §5.1.4 (estimation), §5.1.2 (tester's contribution to iteration & release planning), §4.5 (collaboration-based approaches)
+- TMMi: 2.2 SG2 (establish test estimates); 3.3 SP3.3; 3.5 Peer Reviews (requirements reviews)
+- CTFL v4.0 §5.1.4 (estimation), §5.1.2 (tester's contribution to iteration & release planning), §4.5 (collaboration-based approaches); CTFL v4.0 §3 (static testing / reviews)
 - Source guide: `sources/D9/` *(pending)*
 
 ## 10. Exercise & evidence

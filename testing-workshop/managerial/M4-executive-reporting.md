@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 (GP2.10 review status with higher-level management) |
 | **Other references** | CTAL-TM (stakeholder communication) |

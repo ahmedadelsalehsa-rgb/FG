@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.4 Test Design and Execution (SG1–SG3) |
 | **Other references** | CTFL v4.0 §4 (test techniques), §5.1.5 (prioritisation) |
 | **Source guide** | `sources/D10/` |
-| **Related chapters** | [D9 Grooming (Refinement) & Estimation](D9-grooming-estimation.md) · [D11 Defect Management](D11-defect-management.md) · [D12 Test Automation & CI/CD in the Test Process](D12-test-automation-cicd.md) |
+| **Related chapters** | [D9 Grooming (Refinement) & Estimation](D9-grooming-estimation.md) · [D11 Defect Management](D11-defect-management.md) · [D12 Regression Testing (Automation)](D12-regression-testing-automation.md) |
 
 ## 1. Story hook
 Stories are ready. The team designs risk-prioritised tests, runs the intake test on each build, executes and keeps a log.
@@ -26,6 +27,7 @@ Planned scope:
 - Test procedures, suites and execution schedule
 - Intake/smoke test and build acceptance (G3)
 - Execution, test log, retest & regression
+- Peer review of test cases
 
 > TODO: write from source guide.
 
@@ -44,7 +46,7 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B5 G3/G4; E15 K1–K4
+B4 G3/G4; E15 K1–K4
 
 ## 9. References
 - TMMi: 2.4 Test Design and Execution (SG1–SG3)

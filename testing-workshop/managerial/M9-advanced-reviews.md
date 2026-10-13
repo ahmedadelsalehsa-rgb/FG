@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 4.3 Advanced Reviews |
 | **Other references** | CTAL-TM (reviews); CTFL v4.0 §3 |
 | **Source guide** | `sources/M9/` |
-| **Related chapters** | [S2 Side Topic · Reviews](../senior/side/S2-reviews.md) · [M10 Defect Prevention](M10-defect-prevention.md) |
+| **Related chapters** | [D9 Grooming (Refinement) & Estimation](../senior/D9-grooming-estimation.md) · [M10 Defect Prevention](M10-defect-prevention.md) |
 
 ## 1. Story hook
 Reviews find defects cheaply, so how do we run them as an organisation-wide programme and measure their value?

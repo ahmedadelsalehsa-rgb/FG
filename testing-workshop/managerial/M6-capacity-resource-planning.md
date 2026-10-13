@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 3.1 (staffing); 2.2 (resources) |
 | **Other references** | CTAL-TM (managing the team) |

@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 5.1 Defect Prevention |
 | **Other references** | Orthogonal Defect Classification (ODC); Pareto |
 | **Source guide** | `sources/M10/` |
-| **Related chapters** | [F17 Root Cause Analysis (RCA)](../senior/F17-root-cause-analysis.md) · [F18 CAPA Actions & Lessons Learned](../senior/F18-capa-lessons-learned.md) · [M9 Advanced Reviews](M9-advanced-reviews.md) · [M11 Innovation & Pilots](M11-innovation-pilots.md) |
+| **Related chapters** | [E16 Root Cause Analysis (RCA)](../senior/E16-root-cause-analysis.md) · [E17 CAPA (Corrective & Preventive Actions)](../senior/E17-capa.md) · [M9 Advanced Reviews](M9-advanced-reviews.md) · [M11 Innovation & Pilots](M11-innovation-pilots.md) |
 
 ## 1. Story hook
 RCA keeps finding the same causes across projects. Defect prevention attacks them at organisation level.

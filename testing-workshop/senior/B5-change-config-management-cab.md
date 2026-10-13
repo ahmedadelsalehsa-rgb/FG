@@ -1,13 +1,14 @@
-# B6 · Change Management, Configuration Management & CAB
+# B5 · Change & Configuration Management (CCB & CAB)
 
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.4 SP1.4, SP4.1; GP2.6 (configuration management) |
 | **Other references** | CTFL v4.0 §5.4 (configuration management); ITIL 4 Change Enablement |
-| **Source guide** | `sources/B6/` |
-| **Related chapters** | [A1 Organisation Structure & IT Department Relationships](A1-organisation-structure.md) · [B5 Quality Gates](B5-quality-gates.md) · [D11 Defect Management](D11-defect-management.md) · [F16 Test Closure, Completion Report & Go/No-Go](F16-test-closure-go-no-go.md) |
+| **Source guide** | `sources/B5/` |
+| **Related chapters** | [A1 Organisation Structure, IT Relationships & Test Policy](A1-organisation-it-test-policy.md) · [B3 Test Lifecycle & Integration with SDLC / Agile](B3-test-lifecycle-integration.md) · [D11 Defect Management](D11-defect-management.md) · [E18 Audits](E18-audits.md) |
 
 ## 1. Story hook
 Halfway through the release the business wants a new rule. The baseline is frozen after G2. Who approves the change? And later, who approves the move to production?
@@ -46,12 +47,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B5 G5; E14 risk re-assessment; F19 audits
+B4 G5; E14 risk re-assessment; E18 audits
 
 ## 9. References
 - TMMi: 2.4 SP1.4, SP4.1; GP2.6 (configuration management)
 - CTFL v4.0 §5.4 (configuration management); ITIL 4 Change Enablement
-- Source guide: `sources/B6/` *(pending)*
+- Source guide: `sources/B5/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

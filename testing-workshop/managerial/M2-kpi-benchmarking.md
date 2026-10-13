@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 4.1 Test Measurement |
 | **Other references** | ISO/IEC/IEEE 15939 (measurement process); GQM (Goal-Question-Metric) |

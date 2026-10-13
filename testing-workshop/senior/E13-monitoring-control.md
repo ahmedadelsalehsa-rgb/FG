@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 Test Monitoring and Control (SG1, SG2) |
 | **Other references** | CTFL v4.0 §5.3 (monitoring, control, completion; reporting) |
 | **Source guide** | `sources/E13/` |
-| **Related chapters** | [E14 Risk Management (Monitoring & Control)](E14-risk-management.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) · [F16 Test Closure, Completion Report & Go/No-Go](F16-test-closure-go-no-go.md) |
+| **Related chapters** | [E14 Risk Management (Monitoring & Control)](E14-risk-management.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) · [E18 Audits](E18-audits.md) |
 
 ## 1. Story hook
 Week 2 of execution: progress is behind and the Critical defect is still open. The Test Lead has to see it early, report it honestly and act.
@@ -43,7 +44,7 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B5 gates; E15
+B4 gates; E15
 
 ## 9. References
 - TMMi: 2.3 Test Monitoring and Control (SG1, SG2)

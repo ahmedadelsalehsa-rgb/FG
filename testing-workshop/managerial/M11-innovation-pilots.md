@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 5.3 Test Process Optimization |
 | **Other references** | TMMi 5.3 (test process optimization) |

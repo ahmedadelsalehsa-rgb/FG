@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 SP1.4, SP2.3 |
 | **Other references** | CTFL v4.0 §5.2.4 (product risk control) |
 | **Source guide** | `sources/E14/` |
-| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [E13 Test Monitoring & Control](E13-monitoring-control.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) |
+| **Related chapters** | [C6 Test Planning & Product/Project Risk Assessment](C6-test-planning-risk-assessment.md) · [E13 Test Monitoring & Control](E13-monitoring-control.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) |
 
 ## 1. Story hook
 A risk identified in planning comes true: the environment goes down for three hours. Risks have to be watched, re-scored and turned into issues.
@@ -41,7 +42,7 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-B5 G4/G5; E15 K4
+B4 G4/G5; E15 K4
 
 ## 9. References
 - TMMi: 2.3 SP1.4, SP2.3

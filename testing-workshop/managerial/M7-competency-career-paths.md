@@ -3,11 +3,12 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 3.1 SG2, SG3; 3.2 Test Training Program |
 | **Other references** | ISTQB certification scheme |
 | **Source guide** | `sources/M7/` |
-| **Related chapters** | [A1 Organisation Structure & IT Department Relationships](../senior/A1-organisation-structure.md) · [M6 Capacity & Resource Planning](M6-capacity-resource-planning.md) |
+| **Related chapters** | [A1 Organisation Structure, IT Relationships & Test Policy](../senior/A1-organisation-it-test-policy.md) · [M6 Capacity & Resource Planning](M6-capacity-resource-planning.md) |
 
 ## 1. Story hook
 The Academy itself: how do we grow a tester into a senior, and a senior into a manager?

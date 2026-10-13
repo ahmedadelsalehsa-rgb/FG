@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Level** | Managerial |
+| **Tailoring** | Managerial track |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | Supports 3.3 SP3.3 (estimates) and 5.3 |
 | **Other references** | Cost of Quality model (prevention, appraisal, internal & external failure) |

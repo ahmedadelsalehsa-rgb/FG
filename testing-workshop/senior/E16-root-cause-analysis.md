@@ -1,13 +1,14 @@
-# F17 · Root Cause Analysis (RCA)
+# E16 · Root Cause Analysis (RCA)
 
 | | |
 |---|---|
 | **Level** | Senior |
+| **Tailoring** | Core (depth tailored per batch, see TAILORING.md) |
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 SP3.1 (analyze issues); prepares 5.1 Defect Prevention |
 | **Other references** | CTFL v4.0 §5.5 (defect management: root causes) |
-| **Source guide** | `sources/F17/` |
-| **Related chapters** | [D11 Defect Management](D11-defect-management.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) · [F18 CAPA Actions & Lessons Learned](F18-capa-lessons-learned.md) · [M10 Defect Prevention](../managerial/M10-defect-prevention.md) |
+| **Source guide** | `sources/E16/` |
+| **Related chapters** | [D11 Defect Management](D11-defect-management.md) · [E15 KPIs & Breaches](E15-kpis-breaches.md) · [E17 CAPA (Corrective & Preventive Actions)](E17-capa.md) · [M10 Defect Prevention](../managerial/M10-defect-prevention.md) |
 
 ## 1. Story hook
 A week after release a customer reports wrong VAT rounding. Fixing it is not enough. The team has to find out why it escaped.
@@ -20,7 +21,7 @@ After this chapter, the participant can:
 
 ## 3. Concepts
 Planned scope:
-- When RCA is required (S1/S2 breach, escapes, patterns)
+- When RCA is required (C8/D9 breach, escapes, patterns)
 - 5 Whys (and how to avoid blaming people)
 - Fishbone categories
 - Pareto analysis on defect data
@@ -42,12 +43,12 @@ Planned scope:
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).
 
 ## 8. Metrics & gates touched
-F18 CAPA; M10 defect prevention
+E17 CAPA; M10 defect prevention
 
 ## 9. References
 - TMMi: 2.3 SP3.1 (analyze issues); prepares 5.1 Defect Prevention
 - CTFL v4.0 §5.5 (defect management: root causes)
-- Source guide: `sources/F17/` *(pending)*
+- Source guide: `sources/E16/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.
