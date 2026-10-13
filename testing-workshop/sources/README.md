@@ -16,7 +16,7 @@ When you send guides, it helps to say for each one:
 | B3 | Test Strategy (org + project), quality attribute priorities | ☐ |
 | B4 | SDLC / Agile delivery process, standard test process | ☐ |
 | B5 | Gate definitions / release criteria | ☐ |
-| B6 | Change management procedure, CAB terms of reference, config mgmt procedure | ☐ |
+| B6 | Change management procedure, CAB terms of reference, config mgmt procedure | ☑ NCPD Change Management Process v1.1 |
 | C7 | Master Test Plan template, risk management procedure | ☐ |
 | C8 | Jira / Azure DevOps configuration standard | ☐ |
 | C9 | Environment management & test data procedure *(optional chapter)* | ☐ |
