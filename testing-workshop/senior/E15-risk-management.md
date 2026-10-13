@@ -8,7 +8,7 @@
 | **TMMi** | 2.3 SP1.4, SP2.3 |
 | **Other references** | CTFL v4.0 §5.2.4 (product risk control) |
 | **Source guide** | `sources/E15/` |
-| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [E14 Test Monitoring & Control](E14-monitoring-control.md) · [E16 KPIs & Breaches](E16-kpis-breaches.md) |
+| **Related chapters** | [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [E13 Test Monitoring & Control](E13-monitoring-control.md) · [E16 KPIs & Breaches](E16-kpis-breaches.md) |
 
 ## 1. Story hook
 A risk identified in planning comes true: the environment goes down for three hours. Risks have to be watched, re-scored and turned into issues.

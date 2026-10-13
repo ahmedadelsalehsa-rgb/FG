@@ -11,7 +11,7 @@
 | **Related chapters** | [B4 Test Lifecycle & Integration with SDLC / Agile](B4-test-lifecycle-integration.md) · [E18 CAPA (Corrective & Preventive Actions)](E18-capa.md) · [M1 Test Process Assessment & Improvement Roadmap](../managerial/M1-assessment-improvement-roadmap.md) |
 
 ## 1. Story hook
-Before the next release, QA audits R1.0. Were the gates really held? Do CRs have test impact analysis? Are CAPAs closed?
+Before the next release, QA audits E14.0. Were the gates really held? Do CRs have test impact analysis? Are CAPAs closed?
 
 ## 2. Purpose & outcomes
 After this chapter, the participant can:

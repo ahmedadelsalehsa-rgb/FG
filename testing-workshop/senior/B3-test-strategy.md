@@ -8,10 +8,10 @@
 | **TMMi** | 2.1 Test Policy and Strategy (SG2); 3.4 Non-functional Testing (product risk & approach) |
 | **Other references** | CTFL v4.0 §5.1, §5.2 (risk-based testing), §2.2 (test types); ISO/IEC 25010 (quality model) |
 | **Source guide** | `sources/B3/` |
-| **Related chapters** | [A1 Organization Structure & IT Relationships](A1-organisation-it-relationships.md) · [B4 Test Lifecycle & Integration with SDLC / Agile](B4-test-lifecycle-integration.md) · [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [D13 Regression Testing (Automation)](D13-regression-testing-automation.md) |
+| **Related chapters** | [A1 Organization Structure & IT Relationships](A1-organisation-it-relationships.md) · [B4 Test Lifecycle & Integration with SDLC / Agile](B4-test-lifecycle-integration.md) · [C7 Test Planning & Product/Project Risk Assessment](C7-test-planning-risk-assessment.md) · [D11 Test Design & Execution](D11-test-design-execution.md) |
 
 ## 1. Story hook
-Policy says *what* matters. For R1.0, the strategy decides *how* we test: which levels, which test types, which quality attributes, and how deep each risk area goes.
+Policy says *what* matters. For E14.0, the strategy decides *how* we test: which levels, which test types, which quality attributes, and how deep each risk area goes.
 
 ## 2. Purpose & outcomes
 After this chapter, the participant can:
@@ -28,7 +28,7 @@ Planned scope:
 - Mapping quality attributes → test types → test levels
 - Risk-based approach: risk level → test depth/techniques (assessment itself done in C7)
 - Entry/exit criteria framework (detailed in B5)
-- Regression & automation strategy (detailed in D13)
+- Regression & automation strategy (detailed in D11)
 - Test environment & data approach (detailed in C9)
 
 > TODO: write from source guide.

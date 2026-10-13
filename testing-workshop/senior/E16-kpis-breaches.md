@@ -8,7 +8,7 @@
 | **TMMi** | 2.3 SG1, SG2, SG3 (SP3.1) |
 | **Other references** | CTFL v4.0 §5.3.1 (metrics used in testing) |
 | **Source guide** | `sources/E16/` |
-| **Related chapters** | [E14 Test Monitoring & Control](E14-monitoring-control.md) · [E17 Root Cause Analysis (RCA)](E17-root-cause-analysis.md) · [E18 CAPA (Corrective & Preventive Actions)](E18-capa.md) · [M2 KPI Benchmarking & Cross-Project Use](../managerial/M2-kpi-benchmarking.md) |
+| **Related chapters** | [E13 Test Monitoring & Control](E13-monitoring-control.md) · [E17 Root Cause Analysis (RCA)](E17-root-cause-analysis.md) · [E18 CAPA (Corrective & Preventive Actions)](E18-capa.md) · [M2 KPI Benchmarking & Cross-Project Use](../managerial/M2-kpi-benchmarking.md) |
 
 ## 1. Story hook
 A Critical defect passes its 24-hour SLA. The KPI turns red and a breach is raised. Who is told, and how fast?

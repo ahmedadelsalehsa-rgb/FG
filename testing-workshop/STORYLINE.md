@@ -7,11 +7,11 @@
 The whole track follows **one release of the internal project, from start to finish**. Every chapter opens with a *story hook*, the moment in that release where the topic becomes necessary. Each chapter answers the question *"what happens next, and who decides?"*
 
 ```
- A. WHO WE ARE  →  B. THE RULES  →  C. PREPARING  →  D. DOING THE WORK  →  E. CONTROL  →  F. CLOSE & LEARN
- Org & IT,         Strategy,        Planning & Risk,  Grooming & Estim.,    Monitoring,     Closure &
- Test Policy       Lifecycle,       Tool Setup,       Design & Exec,        Risk, KPIs &    Lessons Learned
-                   Gates, Change    (Env & Data)      Defects, Regression   Breaches, RCA,
-                   & Config Mgmt                      (Automation)          CAPA, Audits
+ A. WHO WE ARE  →  B. THE RULES  →  C. PREPARING  →  D. DOING THE WORK  →  E. CONTROL        →  F. CLOSE & LEARN
+ Org & IT,         Strategy,        Planning & Risk,  Grooming & Estim.,    Monitoring,           Closure &
+ Test Policy       Lifecycle,       Tool Setup,       Design & Exec,        Reviews, Risk,        Lessons Learned
+                   Gates, Change    (Env & Data)      Defects               KPIs & Breaches,
+                   & Config Mgmt                                            RCA, CAPA, Audits
  ─────────────────────────── Senior Level: operate one project well ───────────────────────────
                                                ↓
  ───────────── Managerial Level: run many projects & improve the organisation (TMMi L4–L5) ─────────────
@@ -35,8 +35,8 @@ The whole track follows **one release of the internal project, from start to fin
 | **D. Doing the Work** | D10 | [Grooming & Estimation](senior/D10-grooming-estimation.md) | 2.2, 3.3, 3.5 | Refinement, requirements review, DoR, estimates |
 | | D11 | [Test Design & Execution](senior/D11-test-design-execution.md) | 2.4 | Risk-prioritised tests, intake, execution |
 | | D12 | [Defect Management](senior/D12-defect-management.md) | 2.4 SG4 | Report, triage, fix, tag root cause |
-| | D13 | [Regression Testing (Automation)](senior/D13-regression-testing-automation.md) | 2.4, 3.3 | Risk-based regression, automated pipeline gate |
-| **E. Control** | E14 | [Monitoring & Control](senior/E14-monitoring-control.md) | 2.3 | Progress & quality vs plan |
+| **E. Control** | E13 | [Monitoring & Control](senior/E13-monitoring-control.md) | 2.3 | Progress & quality vs plan |
+| | E14 | [Reviews](senior/E14-reviews.md) | 3.5 | Requirements, plans and test cases reviewed; records as gate evidence |
 | | E15 | [Risk Management](senior/E15-risk-management.md) | 2.3 | Risks re-scored; risk → issue |
 | | E16 | [KPIs & Breaches](senior/E16-kpis-breaches.md) | 2.3 | Thresholds, SLA breach, escalation |
 | | E17 | [Root Cause Analysis](senior/E17-root-cause-analysis.md) | 2.3 SG3 | Why did it happen? |
@@ -67,9 +67,9 @@ The whole track follows **one release of the internal project, from start to fin
 | Organization and Test Policy grouped in Area A as two chapters | A1, A2 |
 | Change & Configuration Management under The Rules | B6 (CCB vs CAB explained there; bodies introduced in A1) |
 | Test Environment & Data optional | C9, marked Optional in the tailoring matrix |
-| Reviews folded into the work | Requirements reviews in D10, test case reviews in D11, advanced reviews in M9 |
-| Automation focused on regression | D13 Regression Testing (Automation) |
-| RCA, CAPA and Audits moved to Control | E17, E18, E19 |
+| Reviews as a Control chapter | E14 Reviews (referenced from D10 grooming and D11 test design); advanced reviews in M9 |
+| Regression / automation chapter removed | Retest & regression covered inside D11; regression approach in B3 Strategy |
+| RCA, CAPA and Audits under Control | E17, E18, E19 |
 | Closure merged with Lessons Learned | F20 (includes Go/No-Go, CAB submission, hypercare) |
 | Topics tailored per batch | [TAILORING.md](TAILORING.md): role profiles, depth levels, coverage matrix, batch profile |
 | Running case | Internal project, release R1.0 |

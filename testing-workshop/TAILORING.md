@@ -40,8 +40,8 @@ Use this as the **starting point**. Adjust it in the batch profile (section 5).
 | **D. Doing the Work** | D10 Grooming & Estimation | E | P | E | P | K | P |
 | | D11 Test Design & Execution | E | P | P | K | K | K |
 | | D12 Defect Management | E | P | E | P | P | P |
-| | D13 Regression Testing (Automation) | P | E | P | K | K | K |
-| **E. Control** | E14 Monitoring & Control | P | K | E | E | E | K |
+| **E. Control** | E13 Monitoring & Control | P | K | E | E | E | K |
+| | E14 Reviews | P | P | E | P | E | P |
 | | E15 Risk Management | P | K | E | E | E | K |
 | | E16 KPIs & Breaches | P | P | E | E | E | K |
 | | E17 Root Cause Analysis | P | P | E | E | E | P |
@@ -60,12 +60,12 @@ Use this as the **starting point**. Adjust it in the batch profile (section 5).
    - Fresh joiners move down one level on E chapters.
 4. **Work requirements override defaults.** Examples:
    - A team on regulated or audited projects sets E19 Audits and B6 Change Mgmt to E.
-   - A team without automation sets D13 to K.
+   - A team with weak requirements quality sets E14 Reviews to E.
    - A team that owns its environments includes C9.
 5. **Mixed batches:** use the **highest** depth needed by more than 30% of participants. Give the others pre-reading or follow-up material.
 6. **Capstone roles follow profiles.**
    - TL and TM rotate as Test Manager and Gatekeeper.
-   - TTA owns regression and the pipeline.
+   - TTA owns the test environment and tool setup.
    - QG runs the audit (E19).
    - XF play PO, BA or Dev in the injects.
 7. **Record the tailoring.** Each batch's profile is kept as evidence for TMMi 3.2 (Test Training Program) and GP2.5.

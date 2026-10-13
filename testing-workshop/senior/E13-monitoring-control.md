@@ -1,4 +1,4 @@
-# E14 · Test Monitoring & Control
+# E13 · Test Monitoring & Control
 
 | | |
 |---|---|
@@ -7,7 +7,7 @@
 | **Status** | Skeleton: waiting for source guide |
 | **TMMi** | 2.3 Test Monitoring and Control (SG1, SG2) |
 | **Other references** | CTFL v4.0 §5.3 (monitoring, control, completion; reporting) |
-| **Source guide** | `sources/E14/` |
+| **Source guide** | `sources/E13/` |
 | **Related chapters** | [E15 Risk Management (Monitoring & Control)](E15-risk-management.md) · [E16 KPIs & Breaches](E16-kpis-breaches.md) · [E19 Audits](E19-audits.md) |
 
 ## 1. Story hook
@@ -49,7 +49,7 @@ B5 gates; E16
 ## 9. References
 - TMMi: 2.3 Test Monitoring and Control (SG1, SG2)
 - CTFL v4.0 §5.3 (monitoring, control, completion; reporting)
-- Source guide: `sources/E14/` *(pending)*
+- Source guide: `sources/E13/` *(pending)*
 
 ## 10. Exercise & evidence
 > TODO: hands-on task on the running case + the TMMi evidence it produces.

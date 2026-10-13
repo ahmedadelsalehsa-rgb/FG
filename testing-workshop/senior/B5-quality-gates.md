@@ -11,7 +11,7 @@
 | **Related chapters** | [B3 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B3-test-strategy.md) · [E19 Audits](E19-audits.md) · [M3 Quality Gate Reporting & Trends](../managerial/M3-gate-reporting-trends.md) |
 
 ## 1. Story hook
-Every milestone of R1.0 now gets a gate. The gate criteria come straight from the strategy's quality attributes and risks.
+Every milestone of E14.0 now gets a gate. The gate criteria come straight from the strategy's quality attributes and risks.
 
 ## 2. Purpose & outcomes
 After this chapter, the participant can:

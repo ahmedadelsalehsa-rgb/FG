@@ -34,11 +34,11 @@ Graduates leave able to pass the CTFL exam. They can also **operate a TMMi Level
 | M1 Fundamentals | A1, A2 |
 | M2 Testing in the SDLC | B3, B4, B5 |
 | M3 Agile | B6, D10 |
-| M4 Static testing | D10 (requirements reviews), D11 (test case reviews) |
+| M4 Static testing | E14 Reviews |
 | M5 Test analysis & design | D11 |
 | M6 Planning & risk | C7, C9 (optional) |
-| M7 Monitoring & control | E14–E19 |
-| M8 Tools | C8, D13 |
+| M7 Monitoring & control | E13, E15–E19 |
+| M8 Tools | C8 |
 | M9 Execution & incidents | D11, D12 |
 | M10 Capstone | F20 (+ all above in practice) |
 | Managerial track | M1–M11 (separate programme) |

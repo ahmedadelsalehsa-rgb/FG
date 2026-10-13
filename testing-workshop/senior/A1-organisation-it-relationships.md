@@ -11,7 +11,7 @@
 | **Related chapters** | [A2 Test Policy](A2-test-policy.md) · [B6 Change & Configuration Management (CCB & CAB)](B6-change-config-management-cab.md) · [M7 Competency Matrix & Test Career Paths](../managerial/M7-competency-career-paths.md) |
 
 ## 1. Story hook
-Release R1.0 of the internal project is about to start. Before anyone writes a test, the team needs to know who does what, who they depend on, and who decides.
+Release E14.0 of the internal project is about to start. Before anyone writes a test, the team needs to know who does what, who they depend on, and who decides.
 
 ## 2. Purpose & outcomes
 After this chapter, the participant can:

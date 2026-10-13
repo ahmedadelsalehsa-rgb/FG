@@ -27,7 +27,7 @@ Planned scope:
 - Estimation techniques: planning poker, WBS, ratios, test point analysis, three-point (PERT)
 - Using the test process database (historical data)
 - Re-estimation after CRs
-- Requirements reviews during refinement (static testing, review types, review record as G1 evidence)
+- Requirements review during refinement (process and records: see E15 Reviews)
 
 > TODO: write from source guide.
 
@@ -40,7 +40,6 @@ Planned scope:
 ## 6. Artifacts & templates
 - DoR checklist *(to create)*
 - Estimation worksheet *(to create)*
-- Review record / log *(to create)*
 
 ## 7. Tool implementation
 > TODO: Jira / Azure DevOps how-to (see [04-tooling-labs.md](../04-tooling-labs.md)).

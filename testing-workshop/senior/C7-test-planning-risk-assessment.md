@@ -11,7 +11,7 @@
 | **Related chapters** | [B3 Test Strategy (incl. Risk-Based Approach & Quality Attributes)](B3-test-strategy.md) · [D10 Grooming (Refinement) & Estimation](D10-grooming-estimation.md) · [E15 Risk Management (Monitoring & Control)](E15-risk-management.md) |
 
 ## 1. Story hook
-With the strategy and gates agreed, the Test Manager writes the plan for R1.0. The plan starts by finding out what could go wrong.
+With the strategy and gates agreed, the Test Manager writes the plan for E14.0. The plan starts by finding out what could go wrong.
 
 ## 2. Purpose & outcomes
 After this chapter, the participant can:

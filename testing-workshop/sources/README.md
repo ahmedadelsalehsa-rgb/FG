@@ -20,11 +20,11 @@ When you send guides, it helps to say for each one:
 | C7 | Master Test Plan template, risk management procedure | ☐ |
 | C8 | Jira / Azure DevOps configuration standard | ☐ |
 | C9 | Environment management & test data procedure *(optional chapter)* | ☐ |
-| D10 | Refinement / DoR guide, estimation guideline, review procedure & checklists | ☐ |
+| D10 | Refinement / DoR guide, estimation guideline | ☐ |
 | D11 | Test design & execution guideline | ☐ |
 | D12 | Defect management procedure (severity/priority, SLA) | ☐ |
-| D13 | Regression strategy, automation / CI-CD pipeline standard | ☐ |
-| E14 | Status reporting guideline | ☐ |
+| E13 | Status reporting guideline | ☐ |
+| E14 | Review procedure & checklists | ☐ |
 | E15 | (same as C7 risk procedure) | ☐ |
 | E16 | KPI catalogue, SLA & escalation matrix | ☐ |
 | E17 | RCA procedure | ☐ |

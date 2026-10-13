@@ -8,7 +8,7 @@
 | **TMMi** | 2.4 Test Design and Execution (SG1–SG3) |
 | **Other references** | CTFL v4.0 §4 (test techniques), §5.1.5 (prioritisation) |
 | **Source guide** | `sources/D11/` |
-| **Related chapters** | [D10 Grooming (Refinement) & Estimation](D10-grooming-estimation.md) · [D12 Defect Management](D12-defect-management.md) · [D13 Regression Testing (Automation)](D13-regression-testing-automation.md) |
+| **Related chapters** | [D10 Grooming (Refinement) & Estimation](D10-grooming-estimation.md) · [D12 Defect Management](D12-defect-management.md) |
 
 ## 1. Story hook
 Stories are ready. The team designs risk-prioritised tests, runs the intake test on each build, executes and keeps a log.
@@ -27,7 +27,7 @@ Planned scope:
 - Test procedures, suites and execution schedule
 - Intake/smoke test and build acceptance (G3)
 - Execution, test log, retest & regression
-- Peer review of test cases
+- Peer review of test cases (see E15 Reviews)
 
 > TODO: write from source guide.
 
