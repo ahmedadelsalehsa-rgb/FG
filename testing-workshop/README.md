@@ -20,10 +20,35 @@ TMMi and governance are **not** added as a separate block at the end. Each topic
 
 Graduates leave able to pass the CTFL exam. They can also **operate a TMMi Level 2/3-compliant test process**, and the capstone produces evidence you can reuse in your TMMi assessment.
 
+## Two layers
+
+| Layer | What it is | Where |
+|---|---|---|
+| **Body of knowledge** | The story: one chapter per topic, Senior (A1–F19, S1–S2) and Managerial (M1–M11) | [STORYLINE.md](STORYLINE.md) → `senior/`, `managerial/` |
+| **Workshop delivery plan** | How the chapters are taught: schedule, labs, capstone, assessment | files `01`–`05` below |
+
+### Workshop module → chapters
+
+| Workshop module ([01](01-curriculum.md)) | Chapters |
+|---|---|
+| M1 Fundamentals | A1, A2 |
+| M2 Testing in the SDLC | B3, B4, B5 |
+| M3 Agile | B6, D9, D12 |
+| M4 Static testing | S2 |
+| M5 Test analysis & design | D10 |
+| M6 Planning & risk | C7, S1 |
+| M7 Monitoring & control | E13, E14, E15, F17, F18 |
+| M8 Tools | C8 |
+| M9 Execution & incidents | D10, D11 |
+| M10 Capstone | F16, F19 (+ all above in practice) |
+| Managerial track | M1–M11 (separate programme) |
+
 ## Files
 
 | File | Contents |
 |---|---|
+| [STORYLINE.md](STORYLINE.md) | Master outline: chapter order, story, decisions |
+| [sources/](sources/) | Where your guides go, with a per-chapter checklist |
 | [01-curriculum.md](01-curriculum.md) | Module-by-module plan, day schedule, learning objectives |
 | [02-tmmi-mapping.md](02-tmmi-mapping.md) | TMMi 2.3 / 2.4 / 3.1 / 3.3 specific goals and practices → workshop module → artifact |
 | [03-governance-track.md](03-governance-track.md) | Quality Gates, Change Management, Risk, KPIs, Breaches, CAPA: content, rules, examples |
