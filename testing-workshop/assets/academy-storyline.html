@@ -1,0 +1,137 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1800px;background:#f6f7fb;font-family:"Segoe UI","Helvetica Neue",Arial,"DejaVu Sans",sans-serif;color:#1d2433;padding:40px 44px}
+h1{font-size:34px;font-weight:800;letter-spacing:-.5px}
+.sub{font-size:16px;color:#5b6475;margin-top:6px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px}
+.legend{display:flex;gap:16px;font-size:13px;color:#5b6475}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:22px;height:14px;border-radius:4px;border:2px solid #9aa3b5;background:#fff}
+.sw.d{border-style:dashed}
+.level{display:flex;align-items:center;gap:12px;margin:8px 0 12px}
+.level .tag{background:#1d2433;color:#fff;font-weight:700;font-size:14px;padding:6px 14px;border-radius:20px;letter-spacing:.5px}
+.level .line{flex:1;height:2px;background:#d5d9e3}
+.level .note{font-size:13px;color:#5b6475}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:26px;position:relative}
+.area{background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(20,30,60,.07);overflow:visible;position:relative;display:flex;flex-direction:column}
+.area:not(:last-child)::after{content:"";position:absolute;right:-22px;top:34px;border-left:14px solid #b7bfd0;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.ah{padding:14px 16px 12px;border-radius:16px 16px 0 0;color:#fff}
+.ah .l{font-size:13px;font-weight:700;opacity:.85;letter-spacing:1px}
+.ah .t{font-size:20px;font-weight:800;margin-top:2px}
+.ah .q{font-size:12.5px;opacity:.9;margin-top:4px;font-style:italic}
+.cards{padding:12px;display:flex;flex-direction:column;gap:9px}
+.card{border:2px solid var(--c);border-left-width:6px;border-radius:10px;padding:9px 11px;background:#fff}
+.card.opt{border-style:dashed;border-left-style:solid;background:#fafbfd}
+.card .id{display:inline-block;font-weight:800;font-size:13px;color:#fff;background:var(--c);border-radius:6px;padding:1px 7px;margin-right:6px}
+.card .n{font-weight:700;font-size:15px;line-height:1.25}
+.card .m{font-size:11.5px;color:#6b7385;margin-top:4px}
+.card .o{font-size:11px;font-weight:700;color:var(--c);margin-left:4px}
+.A{--c:#3f51b5}.B{--c:#00897b}.C{--c:#f57c00}.D{--c:#7b1fa2}.E{--c:#d32f2f}.F{--c:#2e7d32}
+.A .ah{background:#3f51b5}.B .ah{background:#00897b}.C .ah{background:#f57c00}.D .ah{background:#7b1fa2}.E .ah{background:#d32f2f}.F .ah{background:#2e7d32}
+.loop{margin:14px 0 0;font-size:13px;color:#5b6475;text-align:center}
+.loop b{color:#1d2433}
+.mid{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;margin-top:26px}
+.panel{background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(20,30,60,.07);padding:18px 20px}
+.panel h3{font-size:17px;font-weight:800;margin-bottom:12px}
+.depth{display:flex;gap:10px;margin-bottom:12px}
+.dp{flex:1;border-radius:10px;padding:9px 11px;background:#eef1f8}
+.dp b{font-size:15px}.dp div{font-size:12px;color:#5b6475;margin-top:2px}
+.roles{display:flex;flex-wrap:wrap;gap:8px}
+.role{border:1.5px solid #c8cfdd;border-radius:20px;padding:5px 11px;font-size:12.5px}
+.role b{margin-right:4px}
+.always{margin-top:12px;font-size:13px}
+.always span{display:inline-block;background:#fff4e5;border:1.5px solid #f5b971;border-radius:8px;padding:3px 9px;margin:3px 4px 0 0;font-weight:600}
+.gates{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.g{background:#eef7f5;border:1.5px solid #8ccfc5;border-radius:10px;padding:8px 9px}
+.g b{color:#00695c;font-size:14px}.g div{font-size:11.5px;color:#4b5565;margin-top:2px}
+.mgr{margin-top:26px}
+.mband{display:grid;grid-template-columns:repeat(9,1fr);gap:12px}
+.mg{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(20,30,60,.07);border-top:6px solid #455a64;padding:11px 11px 12px}
+.mg .k{font-size:12px;font-weight:800;color:#455a64;letter-spacing:1px;text-transform:uppercase}
+.mc{margin-top:7px;font-size:13px;font-weight:700;line-height:1.25}
+.mc i{font-style:normal;display:inline-block;background:#455a64;color:#fff;border-radius:5px;font-size:11.5px;padding:0 6px;margin-right:5px}
+.mc small{display:block;font-weight:500;color:#6b7385;font-size:11px;margin-top:1px}
+.foot{margin-top:22px;display:flex;justify-content:space-between;font-size:12.5px;color:#6b7385}
+</style></head><body>
+<div class="top">
+ <div><h1>Testing Academy · Senior &amp; Managerial Storyline</h1>
+ <div class="sub">One release (<b>R1.0</b>) of the internal project, followed from start to finish · each chapter answers <i>"what happens next, and who decides?"</i></div></div>
+ <div class="legend"><span><i class="sw"></i>Core chapter</span><span><i class="sw d"></i>Optional chapter</span><span>TMMi process area shown under each chapter</span></div>
+</div>
+
+<div class="level"><span class="tag">SENIOR LEVEL</span><span class="note">Operate one project well · TMMi Levels 2–3</span><span class="line"></span></div>
+<div class="flow">
+ <div class="area A"><div class="ah"><div class="l">AREA A</div><div class="t">Who We Are</div><div class="q">Who does what and who decides?</div></div><div class="cards">
+  <div class="card"><span class="id">A1</span><span class="n">Organization Structure &amp; IT Relationships</span><div class="m">TMMi 3.1 · RACI · governance bodies</div></div>
+  <div class="card"><span class="id">A2</span><span class="n">Test Policy</span><div class="m">TMMi 2.1 · the rules we commit to</div></div>
+ </div></div>
+ <div class="area B"><div class="ah"><div class="l">AREA B</div><div class="t">The Rules</div><div class="q">How do we test and control?</div></div><div class="cards">
+  <div class="card"><span class="id">B3</span><span class="n">Test Strategy</span><div class="m">TMMi 2.1 / 3.4 · risk-based · ISO 25010</div></div>
+  <div class="card"><span class="id">B4</span><span class="n">Lifecycle &amp; Integration</span><div class="m">TMMi 3.3 · SDLC / Agile</div></div>
+  <div class="card"><span class="id">B5</span><span class="n">Quality Gates</span><div class="m">TMMi 2.3 / 3.3 · G0–G6</div></div>
+  <div class="card"><span class="id">B6</span><span class="n">Change &amp; Configuration Mgmt</span><div class="m">TMMi 2.4 · CCB &amp; CAB · baselines</div></div>
+ </div></div>
+ <div class="area C"><div class="ah"><div class="l">AREA C</div><div class="t">Preparing</div><div class="q">What could go wrong? Are we ready?</div></div><div class="cards">
+  <div class="card"><span class="id">C7</span><span class="n">Test Planning &amp; Risk Assessment</span><div class="m">TMMi 2.2 / 3.3 · MTP · risk register</div></div>
+  <div class="card"><span class="id">C8</span><span class="n">Tool Setup</span><div class="m">TMMi 3.3 · Jira / Azure DevOps</div></div>
+  <div class="card opt"><span class="id">C9</span><span class="n">Test Environment &amp; Test Data</span><span class="o">OPTIONAL</span><div class="m">TMMi 2.5 · feeds G3</div></div>
+ </div></div>
+ <div class="area D"><div class="ah"><div class="l">AREA D</div><div class="t">Doing the Work</div><div class="q">Design, run, report.</div></div><div class="cards">
+  <div class="card"><span class="id">D10</span><span class="n">Grooming &amp; Estimation</span><div class="m">TMMi 2.2 / 3.3 · DoR · estimates</div></div>
+  <div class="card"><span class="id">D11</span><span class="n">Test Design &amp; Execution</span><div class="m">TMMi 2.4 · techniques · intake · regression</div></div>
+  <div class="card"><span class="id">D12</span><span class="n">Defect Management</span><div class="m">TMMi 2.4 SG4 · triage · root-cause tags</div></div>
+ </div></div>
+ <div class="area E"><div class="ah"><div class="l">AREA E</div><div class="t">Control</div><div class="q">Are we on track? Why not? Fix it.</div></div><div class="cards">
+  <div class="card"><span class="id">E13</span><span class="n">Monitoring &amp; Control</span><div class="m">TMMi 2.3 · progress &amp; quality</div></div>
+  <div class="card"><span class="id">E14</span><span class="n">Reviews</span><div class="m">TMMi 3.5 · static testing · gate evidence</div></div>
+  <div class="card"><span class="id">E15</span><span class="n">Risk Management</span><div class="m">TMMi 2.3 · monitor &amp; re-assess</div></div>
+  <div class="card"><span class="id">E16</span><span class="n">KPIs &amp; Breaches</span><div class="m">TMMi 2.3 · thresholds · escalation</div></div>
+  <div class="card"><span class="id">E17</span><span class="n">Root Cause Analysis</span><div class="m">TMMi 2.3 SG3 · 5 Whys · Fishbone</div></div>
+  <div class="card"><span class="id">E18</span><span class="n">CAPA</span><div class="m">TMMi 2.3 SG3 / 3.1 · effectiveness</div></div>
+  <div class="card"><span class="id">E19</span><span class="n">Audits</span><div class="m">GP2.9 · process compliance</div></div>
+ </div></div>
+ <div class="area F"><div class="ah"><div class="l">AREA F</div><div class="t">Close &amp; Learn</div><div class="q">Did we deliver? What did we learn?</div></div><div class="cards">
+  <div class="card"><span class="id">F20</span><span class="n">Test Closure &amp; Lessons Learned</span><div class="m">TMMi 2.3 / 3.1 SP5.3 · Go/No-Go · hypercare · process assets</div></div>
+ </div></div>
+</div>
+<div class="loop">↺ <b>Feedback loop:</b> lessons learned &amp; CAPA (E18, F20) update the Test Policy, Strategy, gates and templates for the next release</div>
+
+<div class="mid">
+ <div class="panel"><h3>Tailored per batch: roles × depth</h3>
+  <div class="depth">
+   <div class="dp"><b>K · Awareness</b><div>Knows what, why and who owns it · 30–60 min</div></div>
+   <div class="dp"><b>P · Practitioner</b><div>Can do it with templates · 2–4 h + exercise</div></div>
+   <div class="dp"><b>E · Expert</b><div>Owns, adapts, coaches, defends in audit · 4–8 h</div></div>
+  </div>
+  <div class="roles">
+   <span class="role"><b>TA</b>Test Analyst</span><span class="role"><b>TTA</b>Technical TA / Automation</span><span class="role"><b>TL</b>Test Lead</span>
+   <span class="role"><b>TM</b>Test Manager</span><span class="role"><b>QG</b>Quality Governance</span><span class="role"><b>XF</b>BA / Dev / PO joiners</span>
+  </div>
+  <div class="always">Always included: <span>B5 Quality Gates</span><span>D12 Defect Management</span><span>E16 KPIs &amp; Breaches</span><span>F20 Closure &amp; Lessons Learned</span></div>
+ </div>
+ <div class="panel"><h3>Quality gates along the story</h3>
+  <div class="gates">
+   <div class="g"><b>G0</b><div>Initiation</div></div><div class="g"><b>G1</b><div>Requirements baseline</div></div>
+   <div class="g"><b>G2</b><div>Test plan approved</div></div><div class="g"><b>G3</b><div>Build acceptance</div></div>
+   <div class="g"><b>G4</b><div>System test exit</div></div><div class="g"><b>G5</b><div>Go / No-Go · CAB</div></div>
+   <div class="g"><b>G6</b><div>Hypercare exit</div></div>
+  </div>
+ </div>
+</div>
+
+<div class="mgr">
+ <div class="level"><span class="tag" style="background:#455a64">MANAGERIAL LEVEL</span><span class="note">Run many projects &amp; improve the organisation · TMMi Levels 4–5</span><span class="line"></span></div>
+ <div class="mband">
+  <div class="mg"><div class="k">Assess</div><div class="mc"><i>M1</i>Assessment &amp; Improvement Roadmap<small>TMMi 3.1 SG4</small></div></div>
+  <div class="mg"><div class="k">Measure</div><div class="mc"><i>M2</i>KPI Benchmarking &amp; Cross-Project Use<small>TMMi 4.1</small></div></div>
+  <div class="mg"><div class="k">Report</div><div class="mc"><i>M3</i>Quality Gate Reporting &amp; Trends<small>TMMi 4.2 / 5.2</small></div></div>
+  <div class="mg"><div class="k">Tell</div><div class="mc"><i>M4</i>Executive Reporting &amp; Stakeholders<small>GP2.10</small></div></div>
+  <div class="mg"><div class="k">Money</div><div class="mc"><i>M5</i>Cost of Quality &amp; Budgeting</div></div>
+  <div class="mg"><div class="k">People</div><div class="mc"><i>M6</i>Capacity &amp; Resource Planning</div><div class="mc"><i>M7</i>Competency Matrix &amp; Career Paths<small>TMMi 3.1 / 3.2</small></div></div>
+  <div class="mg"><div class="k">Partners</div><div class="mc"><i>M8</i>Vendor &amp; Outsourced Testing</div></div>
+  <div class="mg"><div class="k">Prevent</div><div class="mc"><i>M9</i>Advanced Reviews<small>TMMi 4.3</small></div><div class="mc"><i>M10</i>Defect Prevention<small>TMMi 5.1</small></div></div>
+  <div class="mg"><div class="k">Innovate</div><div class="mc"><i>M11</i>Innovation &amp; Pilots<small>TMMi 5.3</small></div></div>
+ </div>
+</div>
+<div class="foot"><span>Every chapter: Story hook · Outcomes · Concepts · Process · Rules · Templates · Tool how-to · Metrics &amp; gates · References · Exercise &amp; evidence · Takeaway</span><span>Testing Academy · Storyline v1</span></div>
+</body></html>

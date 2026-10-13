@@ -17,6 +17,8 @@ The whole track follows **one release of the internal project, from start to fin
  ───────────── Managerial Level: run many projects & improve the organisation (TMMi L4–L5) ─────────────
 ```
 
+![Academy storyline](assets/academy-storyline.png)
+
 **Running case:** the Academy's internal project, release **R1.0**. The capstone in [05-capstone-and-assessment.md](05-capstone-and-assessment.md) plays the same story live.
 
 ## 2. Senior Level
